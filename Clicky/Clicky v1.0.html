@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Clicky v1.0</title>
+</head>
+<body>
+    <h1>Willkommen bei Clicky</h1>
+    <p style="margin-block-start: -30px">Verson: 1.0</p>
+    
+    <div style="margin-block: 10px;">
+        <h2 style="margin-block: -2px;" id="Coin_Text">Coin: 0</h2>
+        <p style="margin-block: 0px;" id="Power_Text">Power: 1</p>
+    </div>
+
+    <button style="font-size: x-large; margin: 10px; padding: 20px; padding-inline: 100px" id="Click_Button">Click [Space]</button>
+
+
+    <div style="padding: 5px; background-color: rgb(204, 204, 204); margin: 10px;">
+        <h3 style="margin: 10px;">Multi</h3>
+        <div>
+            <div style="margin: 10px;">
+                <p style="margin: 0px;" id="Multi_cost">Cost: 10</p>
+                <p style="margin: 0px;" id="Multi_anz">Anzahl: 1</p>
+            </div>
+            <button style="font-size: larger; margin: 10px;" id="Multi_Button">Buy [1]</button>
+        </div>
+    </div>
+    <div style="padding: 5px; background-color: rgb(204, 204, 204); margin: 10px;">
+        <h3 style="margin: 10px;">Rebirth</h3>
+        <div>
+            <div style="margin: 10px;">
+                <p style="margin: 0px;" id="Rebirth_cost">Cost: 200</p>
+                <p style="margin: 0px;" id="Rebirth_anz">Anzahl: 0</p>
+            </div>
+            <button style="font-size: larger; margin: 10px;" id="Rebirth_Button">Buy [2]</button>
+        </div>
+    </div>
+
+    <p><button style="background-color: red;" id="Reset">Reset</button> <button id="Save">Save [AutoSpeicher]</button> <button id="Load">Load</button></p>
+  
+    <script>
+        const Coin_Text = document.getElementById("Coin_Text");
+        const Power_Text = document.getElementById("Power_Text");
+        const Button = document.getElementById("Click_Button");
+        
+        let Coin = 0;
+        let uensoocjaloasz = Coin;
+
+        let Hacker = false;
+        let wqoiucnrldskeo = false;
+        let siueebcxioermc = false;
+        
+        const Multi_Cost = document.getElementById("Multi_cost");
+        const Multi_Anz = document.getElementById("Multi_anz");
+        const Multi_Button = document.getElementById("Multi_Button");
+        let Multi_cost = 10;
+        let Multi_anz = 1;
+        let iuuuuqwebyxuz = Multi_cost;
+        let ivwzzxtwmmmmm = Multi_anz;
+        
+        const Rebirth_Cost = document.getElementById("Rebirth_cost");
+        const Rebirth_Anz = document.getElementById("Rebirth_anz");
+        const Rebirth_Button = document.getElementById("Rebirth_Button");
+        let Rebirth_cost= 200;
+        let Rebirth_anz = 0;
+        let oqwennxyczwqeh = Rebirth_cost;
+        let ubyreowncztqas = Rebirth_anz;
+
+
+        function hack() {
+            Coin = 0;
+            Multi_anz = 0;
+            Rebirth_anz = 0;
+            Hacker = true;
+            siueebcxioermc = true;
+            wqoiucnrldskeo = true;
+        }
+        function kontrol() {
+            if ((Coin != uensoocjaloasz) ||
+            (Multi_cost != iuuuuqwebyxuz) ||
+            (Multi_anz != ivwzzxtwmmmmm) ||
+            (Rebirth_cost != oqwennxyczwqeh) ||
+            (Rebirth_anz != ubyreowncztqas)) {
+                hack()
+            }
+        }
+
+        function update() {
+            kontrol()
+            if (Hacker || wqoiucnrldskeo || siueebcxioermc) {
+                document.body.style.backgroundColor = `red`;
+                Button.textContent = `Hacker`;
+                Button.style.background = `red`;
+                Coin_Text.textContent = `Hacker`;
+                Coin_Text.style.background = `red`;
+                Multi_Button.textContent = `Hacker`;
+                Multi_Button.style.background = "red";
+                Rebirth_Button.textContent = `Hacker`;
+                Rebirth_Button.style.background = "red";
+                hack()
+                return
+            } else {
+                Coin_Text.textContent = `Coin: ${Coin}`;
+            }
+
+            Power_Text.textContent = `Power: ${(Multi_anz * Math.pow(1.5, Rebirth_anz))}`;
+
+            Multi_Anz.textContent = `Anzahl: ${Multi_anz}`;
+            Multi_Cost.textContent = `Cost: ${Multi_cost}`;
+            if (Multi_cost <= Coin) {
+                Multi_Button.style.background = "forestgreen";
+            } else {
+                Multi_Button.style.background = "content-box";
+            }
+
+            Rebirth_Anz.textContent = `Anzahl: ${Rebirth_anz}`;
+            Rebirth_Cost.textContent = `Cost: ${Rebirth_cost}`;
+            if (Rebirth_cost <= Coin) {
+                Rebirth_Button.style.background = "forestgreen";
+            } else {
+                Rebirth_Button.style.background = "content-box";
+            }
+        }
+
+        function Click() {
+            kontrol()
+            Coin += (Multi_anz * Math.pow(2, Rebirth_anz));
+            uensoocjaloasz = Coin;
+            update();
+        }; Button.addEventListener("click", Click);
+        
+        function Multi_Buy() {
+            kontrol()
+            if (Multi_cost <= Coin) {
+                Coin -= Multi_cost;
+                Multi_cost *= 2;
+                Multi_anz += 1;
+                
+                uensoocjaloasz = Coin;
+                iuuuuqwebyxuz = Multi_cost;
+                ivwzzxtwmmmmm = Multi_anz;
+            }
+            update()
+        }; Multi_Button.addEventListener("click", Multi_Buy);
+
+        function Rebirth_Buy() {
+            kontrol()
+            if (Rebirth_cost <= Coin) {
+                Coin = 0;
+                Multi_anz = 1;
+                Multi_cost = 10;
+                Rebirth_cost *= 2;
+                Rebirth_anz += 1;
+                
+                uensoocjaloasz = Coin;
+                iuuuuqwebyxuz = Multi_cost;
+                ivwzzxtwmmmmm = Multi_anz;
+                oqwennxyczwqeh = Rebirth_cost;
+                ubyreowncztqas = Rebirth_anz;
+            }
+            update()
+        }; Rebirth_Button.addEventListener("click", Rebirth_Buy);
+
+
+        function save() {
+            console.log("Save")
+            if (!Hacker) {
+                localStorage.clear();
+                localStorage.setItem("Save", true);
+                localStorage.setItem("Coin", Coin);
+
+                localStorage.setItem("Multi Cost", Multi_cost);
+                localStorage.setItem("Multi Anz", Multi_anz);
+
+                localStorage.setItem("Rebirth Cost", Rebirth_cost);
+                localStorage.setItem("Rebirth Anz", Rebirth_anz);
+            }
+        }
+        function load() {
+            console.log("Load");
+            if (localStorage.getItem("Save")) {
+                Coin = Number(localStorage.getItem("Coin"));
+                uensoocjaloasz = Coin;
+                
+                Multi_cost = Number(localStorage.getItem("Multi Cost"));
+                Multi_anz = Number(localStorage.getItem("Multi Anz"));
+                iuuuuqwebyxuz = Multi_cost;
+                ivwzzxtwmmmmm = Multi_anz;
+
+                Rebirth_cost= Number(localStorage.getItem("Rebirth Cost"));
+                Rebirth_anz = Number(localStorage.getItem("Rebirth Anz"));
+                oqwennxyczwqeh = Rebirth_cost;
+                ubyreowncztqas = Rebirth_anz;
+            }
+        }
+        function reset() {
+            Coin = 0;
+            uensoocjaloasz = Coin;
+
+            Multi_cost = 10;
+            Multi_anz = 1;
+            iuuuuqwebyxuz = Multi_cost;
+            ivwzzxtwmmmmm = Multi_anz;
+
+            Rebirth_cost= 200;
+            Rebirth_anz = 0;
+            oqwennxyczwqeh = Rebirth_cost;
+            ubyreowncztqas = Rebirth_anz;
+            
+            save();
+            update();
+        }
+        const Reset = document.getElementById("Reset");
+        const Save = document.getElementById("Save");
+        const Load = document.getElementById("Load");
+
+        window.onbeforeunload = save;
+        Reset.addEventListener("click", reset);
+        Save.addEventListener("click", save);
+        Load.addEventListener("click", load);
+
+        load();
+
+
+        document.addEventListener("keypress", function(event) {
+            if (event.key == "1") { Multi_Buy() }
+            if (event.key == "2") { Rebirth_Buy() }
+        })
+        document.addEventListener("keyup", function(event) {
+            if (event.key == " ") { Click() }
+        })
+        update();
+    </script>
+</body>
+</html>
