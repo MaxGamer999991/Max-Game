@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Clicky</title>
+</head>
+<body>
+    <h1>Willkommen bei Clicky</h1>
+    
+    <div style="margin-block: 10px;">
+        <h2 style="margin-block: -2px;" id="Coin_Text">Coin: 0</h2>
+        <p style="margin-block: 0px;" id="Power_Text">Power: 1</p>
+    </div>
+
+    <button style="font-size: x-large; margin: 10px" id="Click_Button">Click</button>
+
+    <div style="margin: 10px;">
+        <h3 style="margin: 10px;">Multi</h3>
+        <div>
+            <div style="margin: 10px;">
+                <p style="margin: 0px;" id="Multi_cost">Cost: 10</p>
+                <p style="margin: 0px;" id="Multi_anz">Anzahl: 1</p>
+            </div>
+            <button style="font-size: larger; margin: 10px;" id="Multi_Button">Buy</button>
+        </div>
+    </div>
+
+    <div style="margin: 10px;">
+        <h3 style="margin: 10px;">Rebirth</h3>
+        <div>
+            <div>
+                <p style="margin-bottom: 0;" id="Rebirth_cost">Cost: 200</p>
+                <p style="margin-top: 0; margin-bottom" id="Rebirth_anz">Anzahl: 0</p>
+            </div>
+            <button style="font-size: larger; margin: 5px;" id="Rebirth_Button">Buy</button>
+        </div>
+    </div>
+  
+    <script>
+        const Coin_Text = document.getElementById("Coin_Text");
+        const Power_Text = document.getElementById("Power_Text");
+        const Button = document.getElementById("Click_Button");
+    
+        let Coin = 0;
+
+        const Multi_Cost = document.getElementById("Multi_cost");
+        const Multi_Anz = document.getElementById("Multi_anz");
+        const Multi_Button = document.getElementById("Multi_Button");
+        let Multi = 1;
+        let Multi_cost = 10;
+        let Multi_anz = 1;
+
+        const Rebirth_Cost = document.getElementById("Rebirth_cost");
+        const Rebirth_Anz = document.getElementById("Rebirth_anz");
+        const Rebirth_Button = document.getElementById("Rebirth_Button");
+        let Rebirth = 0;
+        let Rebirth_cost= 200;
+        let Rebirth_anz = 0;
+    
+        function update() {
+            Coin_Text.textContent = `Coin: ${Coin}`;
+            Power_Text.textContent = `Power: ${1}`;
+        }
+
+        function Click() {
+            Coin += 1;
+            update();
+        }
+        Button.addEventListener("click", Click)
+
+        update();
+    </script>
+</body>
+</html>
