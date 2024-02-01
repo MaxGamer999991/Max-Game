@@ -1,2 +1,2 @@
-# Clicky
-Mein Html Spiel
+# Max-Game
+Max-Game ist mein erste Html Spiel Sammlung
