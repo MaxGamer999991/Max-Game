@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html style="touch-action: none; zoom: 1.5;">
+    <head>
+        <title>Crafty v0.0</title>
+    </head>
+    <body style="font-family: sans-serif; min-width: 400px;">
+        <h1>Willkommen bei Crafty</h1>
+        <p style="margin-top: -25px;">Version: Beta</p>
+
+        <div style="
+        display: flex;
+        margin: 10px;
+        padding: 10px;
+        background-color: lightgray;
+        border-radius: 10px;
+        flex-wrap: wrap;
+        " id="1">
+            <div style="
+            margin: 10px;
+            padding: 10px;
+            font-size: large;
+            border: darkgray;
+            border-width: 3px;
+            border-style: solid;
+            border-radius: 10px;
+            cursor: pointer;
+            ">
+                <p style="margin: 0;">Holz: -</p>
+            </div>
+        </div>
+    </body>
+</html>
+<script>
+    function erstelen(name, value, don) {
+        return `
+        <button style="
+        margin: 1px;
+        padding: 5px;
+        font-size: large;
+        border: ${don ? "green" : "darkgray"};
+        border-width: 3px;
+        border-style: solid;
+        border-radius: 10px;
+        cursor: pointer;
+        " onclick="${name}_Buy(); update()">
+            ${name}: ${value}
+    </button>`
+    }
+    function update() {
+        document.getElementById("1").innerHTML = `
+            ${erstelen("Holz"     , Holz     , true)}
+            ${erstelen("Stein"    , Stein    , false)}
+            ${erstelen("Ofen"     , Ofen     , true)}
+            ${erstelen("Stock"    , Stock    , false)}
+            ${erstelen("Holzspitz", Holzspitz, false)}`;
+    }
+    let Holz = 0;
+    let Stein = 0;
+    let Ofen = 0;
+    let Stock = 0;
+    let Holzspitz = 0;
+    function Holz_Buy() {Holz += 1}
+    update()
+</script>
