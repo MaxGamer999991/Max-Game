@@ -25,40 +25,52 @@
             border-radius: 10px;
             cursor: pointer;
             ">
-                <p style="margin: 0;">Holz: -</p>
+                <p style="margin: 0;">None: -</p>
             </div>
         </div>
     </body>
 </html>
 <script>
-    function erstelen(name, value, don) {
+    function erstelen(name, value, kannCraft, onclick) {
         return `
         <button style="
         margin: 1px;
         padding: 5px;
         font-size: large;
-        border: ${don ? "green" : "darkgray"};
+        border: ${kannCraft ? "green" : "darkgray"};
         border-width: 3px;
         border-style: solid;
         border-radius: 10px;
         cursor: pointer;
-        " onclick="${name}_Buy(); update()">
+        " onclick="if (${kannCraft}) {${onclick}}; update()">
             ${name}: ${value}
     </button>`
     }
     function update() {
-        document.getElementById("1").innerHTML = `
-            ${erstelen("Holz"     , Holz     , true)}
-            ${erstelen("Stein"    , Stein    , false)}
-            ${erstelen("Ofen"     , Ofen     , true)}
-            ${erstelen("Stock"    , Stock    , false)}
-            ${erstelen("Holzspitz", Holzspitz, false)}`;
+        let asd = ""
+        let len
+        for (const asda in data) {
+            asd = asd + erstelen(asda, data[asda].value, eval(data[asda].kannCraft), data[asda].onclick)
+            len ++;
+        }
+        document.getElementById("1").innerHTML = asd
     }
-    let Holz = 0;
-    let Stein = 0;
-    let Ofen = 0;
-    let Stock = 0;
-    let Holzspitz = 0;
-    function Holz_Buy() {Holz += 1}
+    let data = {
+        Holz : {
+            value : 0,
+            kannCraft : "true",
+            onclick : "data.Holz.value ++;"
+        },
+        Bret : {
+            value : 0,
+            kannCraft : "data.Holz.value >= 2",
+            onclick : "data.Bret.value += 1; data.Holz.value -= 2"
+        },
+        Stock : {
+            value : 0,
+            kannCraft : "data.Bret.value >= 1",
+            onclick : "data.Stock.value += 10; data.Bret.value -= 1;"
+        },
+    }
     update()
 </script>
