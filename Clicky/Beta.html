@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html style="touch-action: manipulation; zoom: 1.5; overflow-y: scroll;">
 	<head>
-		<title>Clicky v3.2</title>
+		<title>Clicky v4.0</title>
 		<link rel="icon" href="https://lh3.google.com/u/0/d/1Z3uYexZ2Xtkv4exeuNPiIAOQrXvp9lVW=w960-h518-iv1">
 	</head>
 	<body style="font-family: sans-serif; min-width: 500px;">
 		<h1>Willkommen bei Clicky</h1>
-		<p style="margin-top: -30px;">Version: 3.2</p>
+		<p style="margin-top: -30px;">Version: 4.0</p>
 
 
 		<div style="margin-block: 10px;">
@@ -720,66 +720,66 @@
 		}
 
 		function Speichern() {
-			localStorage.setItem("V3.2 Save", true);
-			localStorage.setItem("V3.2 Coin", Coin);
+			localStorage.setItem("V4.0 Save", true);
+			localStorage.setItem("V4.0 Coin", Coin);
 
-			localStorage.setItem("V3.2 L1", Level.L1);
-			localStorage.setItem("V3.2 L2", Level.L2);
-			localStorage.setItem("V3.2 L3", Level.L3);
-			localStorage.setItem("V3.2 L4", Level.L4);
-			localStorage.setItem("V3.2 L5", Level.L5);
+			localStorage.setItem("V4.0 L1", Level.L1);
+			localStorage.setItem("V4.0 L2", Level.L2);
+			localStorage.setItem("V4.0 L3", Level.L3);
+			localStorage.setItem("V4.0 L4", Level.L4);
+			localStorage.setItem("V4.0 L5", Level.L5);
 
-			localStorage.setItem("V3.2 Multi Costen", Multi.Costen);
-			localStorage.setItem("V3.2 Multi Anzahl", Multi.Anzahl);
-			localStorage.setItem("V3.2 Multi Auto", Multi.Auto);
-			localStorage.setItem("V3.2 Multi Rabat", Multi.Rabat);
+			localStorage.setItem("V4.0 Multi Costen", Multi.Costen);
+			localStorage.setItem("V4.0 Multi Anzahl", Multi.Anzahl);
+			localStorage.setItem("V4.0 Multi Auto", Multi.Auto);
+			localStorage.setItem("V4.0 Multi Rabat", Multi.Rabat);
 
-			localStorage.setItem("V3.2 Rebirth Costen", Rebirth.Costen);
-			localStorage.setItem("V3.2 Rebirth Anzahl", Rebirth.Anzahl);
-			localStorage.setItem("V3.2 Rebirth Auto", Rebirth.Auto);
-			localStorage.setItem("V3.2 Rebirth Rabat", Rebirth.Rabat);
+			localStorage.setItem("V4.0 Rebirth Costen", Rebirth.Costen);
+			localStorage.setItem("V4.0 Rebirth Anzahl", Rebirth.Anzahl);
+			localStorage.setItem("V4.0 Rebirth Auto", Rebirth.Auto);
+			localStorage.setItem("V4.0 Rebirth Rabat", Rebirth.Rabat);
 
-			localStorage.setItem("V3.2 S Rebirth Costen", S_Rebirth.Costen);
-			localStorage.setItem("V3.2 S Rebirth Anzahl", S_Rebirth.Anzahl);
+			localStorage.setItem("V4.0 S Rebirth Costen", S_Rebirth.Costen);
+			localStorage.setItem("V4.0 S Rebirth Anzahl", S_Rebirth.Anzahl);
 
-			localStorage.setItem("V3.2 Crit", Crit);
+			localStorage.setItem("V4.0 Crit", Crit);
 			document.getElementById("Loaden").textContent = "Laden";
 		}
 		function Laden() {
-			if (localStorage.getItem("V3.2 Save") == "true") {
-				Coin = Number(localStorage.getItem("V3.2 Coin"));
+			if (localStorage.getItem("V4.0 Save") == "true") {
+				Coin = Number(localStorage.getItem("V4.0 Coin"));
 
 				Level = {
-					L1 : (localStorage.getItem("V3.2 L1") == "true"),
-					L2 : (localStorage.getItem("V3.2 L2") == "true"),
-					L3 : (localStorage.getItem("V3.2 L3") == "true"),
-					L4 : (localStorage.getItem("V3.2 L4") == "true"),
-					L5 : (localStorage.getItem("V3.2 L5") == "true"),
+					L1 : (localStorage.getItem("V4.0 L1") == "true"),
+					L2 : (localStorage.getItem("V4.0 L2") == "true"),
+					L3 : (localStorage.getItem("V4.0 L3") == "true"),
+					L4 : (localStorage.getItem("V4.0 L4") == "true"),
+					L5 : (localStorage.getItem("V4.0 L5") == "true"),
 				}
 
 				Multi = {
 					Offen  : Multi.Offen,
-					Costen : Number(localStorage.getItem("V3.2 Multi Costen")),
-					Rabat  : Number(localStorage.getItem("V3.2 Multi Rabat")),
-					Anzahl : Number(localStorage.getItem("V3.2 Multi Anzahl")),
-					Auto   : (localStorage.getItem("V3.2 Multi Auto") == "true"),
+					Costen : Number(localStorage.getItem("V4.0 Multi Costen")),
+					Rabat  : Number(localStorage.getItem("V4.0 Multi Rabat")),
+					Anzahl : Number(localStorage.getItem("V4.0 Multi Anzahl")),
+					Auto   : (localStorage.getItem("V4.0 Multi Auto") == "true"),
 				}
 
 				Rebirth = {
 					Offen  : Rebirth.Offen,
-					Costen : Number(localStorage.getItem("V3.2 Rebirth Costen")),
-					Rabat  : Number(localStorage.getItem("V3.2 Rebirth Rabat")),
-					Anzahl : Number(localStorage.getItem("V3.2 Rebirth Anzahl")),
-					Auto   : (localStorage.getItem("V3.2 Rebirth Auto") == "true"),
+					Costen : Number(localStorage.getItem("V4.0 Rebirth Costen")),
+					Rabat  : Number(localStorage.getItem("V4.0 Rebirth Rabat")),
+					Anzahl : Number(localStorage.getItem("V4.0 Rebirth Anzahl")),
+					Auto   : (localStorage.getItem("V4.0 Rebirth Auto") == "true"),
 				}
 
 				S_Rebirth = {
 					Offen  : Rebirth.Offen,
-					Costen : Number(localStorage.getItem("V3.2 S Rebirth Costen")),
-					Anzahl : Number(localStorage.getItem("V3.2 S Rebirth Anzahl")),
+					Costen : Number(localStorage.getItem("V4.0 S Rebirth Costen")),
+					Anzahl : Number(localStorage.getItem("V4.0 S Rebirth Anzahl")),
 				}
 
-				Crit = Number(localStorage.getItem("V3.2 Crit"))
+				Crit = Number(localStorage.getItem("V4.0 Crit"))
 			} else {
 				document.getElementById("Loaden").textContent = "Noch nicht gespeichert";
 			}
