@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html style="overflow: hidden;">
+    <head>
+        <title>Speedy v0.0</title>
+    </head>
+    <body style="margin: 0;">
+        <p id="Angel"></p>
+        <p id="Auto" style="margin: 0; position: absolute; text-wrap: nowrap;">[=====][>]</p>
+        <p id="Lenk" style="margin: 0; position: absolute; font-family: fantasy;">></p>
+    </body>
+</html>
+<script>
+    let x = window.innerWidth / 2;
+    let y = window.innerHeight / 2;
+    let dx = 0;
+    let dy = 0;
+    let angle = 0;
+    let turn = 0;
+
+    let angelh = 0;
+
+    let Up    = false;
+    let Down  = false;
+    let Left  = false;
+    let Right = false;
+    addEventListener('keydown', (event) => {
+        switch (event.key) {
+            case 'ArrowUp':   Up    = true; break;
+            case 'ArrowDown': Down  = true; break;
+            case 'ArrowLeft': Left  = true; break;
+            case 'ArrowRight':Right = true; break;
+        }
+    });
+    addEventListener('keyup', (event) => {
+        switch (event.key) {
+            case 'ArrowUp':   Up    = false; break;
+            case 'ArrowDown': Down  = false; break;
+            case 'ArrowLeft': Left  = false; break;
+            case 'ArrowRight':Right = false; break;
+        }
+    });
+
+    function upadat() {
+        let speed = 0;
+        speed -= Down ? 0.2 : 0
+        speed += Up   ? 0.2 : 0
+
+        turn -= Right ? 9 : 0
+        turn += Left  ? 9 : 0
+        turn /= 1.175
+
+        dx += Math.sin(angle * Math.PI / 180) * speed;
+        dy += Math.cos(angle * Math.PI / 180) * speed;
+        dx /= 1.02
+        dy /= 1.02
+
+        x += dx
+        y += dy
+
+        if (Math.pow(2, Math.pow(0.5, dx + dy) - 1) - 1 != 0) {angle += turn * (Math.abs(Math.pow(2, Math.pow(0.5, dx + dy) - 1) - 1) / 100)}
+        if (Math.pow(2, Math.pow(0.5, dx + dy) - 1) - 1 != 0) {angelh = turn * (Math.abs(Math.pow(2, Math.pow(0.5, dx + dy) - 1) - 1) / 100)}
+
+        document.getElementById("Angel").textContent = angelh;
+        document.getElementById("Auto").style.left = x + "px";
+        document.getElementById("Auto").style.top  = y + "px";
+        document.getElementById("Auto").style.transform = `rotate(${90 - angle}deg) scale(1.5)`;
+        document.getElementById("Lenk").style.left = (x + 33 + (Math.sin((angle + turn) * Math.PI / 180) * 20) + (Math.sin((angle) * Math.PI / 180) * 40)) + "px";
+        document.getElementById("Lenk").style.top  = (y      + (Math.cos((angle + turn) * Math.PI / 180) * 20) + (Math.cos((angle) * Math.PI / 180) * 40)) + "px";
+        document.getElementById("Lenk").style.transform = `rotate(${90 - (angle + turn)}deg) scale(1.5)`;
+
+        while (x > window.innerWidth) {x -= window.innerWidth}
+        while (x < 0)                 {x += window.innerWidth}
+        while (y > window.innerHeight) {y -= window.innerHeight}
+        while (y < 0)                  {y += window.innerHeight}
+    }
+    upadat()
+    setInterval(upadat, 10)
+</script>
