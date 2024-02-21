@@ -348,8 +348,9 @@
 				</div>
 			</div>
 			<div style="
-			width: -webkit-fill-available;
 			margin-left: 10px;
+			min-width: 300px;
+			max-width: 300px;
 			">
 				<h3 style="
 				margin: 0px;
@@ -389,43 +390,79 @@
 
 			<div style="
 			margin: 5px;
+			flex-direction: column;
 			" id="sammlung">
 
-				<button style="
-				margin: 5px;
-				padding-inline: 20px;
-				font-size: large;
-				border: darkgray;
-				border-width: 3px;
-				border-style: solid;
-				border-radius: 10px;
-				cursor: pointer;
-				background-color: dodgerblue;
-				" onclick="Speichern()">Speichern</button>
+				<div style="
+				display: flex;
+				">
 
-				<button style="
-				margin: 5px;
-				padding-inline: 20px;
-				font-size: large;
-				border: darkgray;
-				border-width: 3px;
-				border-style: solid;
-				border-radius: 10px;
-				cursor: pointer;
-				background-color: forestgreen;
-				" id="Loaden" onclick="Laden()">Laden</button>
+					<button style="
+					margin: 5px;
+					padding-inline: 20px;
+					font-size: large;
+					border: darkgray;
+					border-width: 3px;
+					border-style: solid;
+					border-radius: 10px;
+					cursor: pointer;
+					background-color: lightgrey;
+					" onclick="Speichern()">Speichern</button>
 
-				<button style="
-				margin: 5px;
-				padding-inline: 20px;
-				font-size: large;
-				border: darkgray;
-				border-width: 3px;
-				border-style: solid;
-				border-radius: 10px;
-				cursor: pointer;
-				background-color: red;
-				" onmousedown="Z_Click();" onmouseup="Zurücksetzen()">Alles Zurücksetzen</button>
+					<button style="
+					margin: 5px;
+					padding-inline: 20px;
+					font-size: large;
+					border: darkgray;
+					border-width: 3px;
+					border-style: solid;
+					border-radius: 10px;
+					cursor: pointer;
+					background-color: lightgrey;
+					" id="Loaden" onclick="Laden()">Laden</button>
+
+					<button style="
+					margin: 5px;
+					padding-inline: 20px;
+					font-size: large;
+					border: darkgray;
+					border-width: 3px;
+					border-style: solid;
+					border-radius: 10px;
+					cursor: pointer;
+					background-color: red;
+					" onmousedown="Z_Click();" onmouseup="Zurücksetzen()">Alles Zurücksetzen</button>
+
+				</div>
+				<div style="
+				display: flex;
+				">
+
+					<button style="
+					margin: 5px;
+					padding-inline: 20px;
+					font-size: large;
+					border: darkgray;
+					border-width: 3px;
+					border-style: solid;
+					border-radius: 10px;
+					cursor: pointer;
+					background-color: lightgrey;
+					" onclick="Speichern_Als()">Speichern als Datei</button>
+
+					<button style="
+					margin: 5px;
+					padding-inline: 20px;
+					font-size: large;
+					border: darkgray;
+					border-width: 3px;
+					border-style: solid;
+					border-radius: 10px;
+					cursor: pointer;
+					background-color: lightgrey;
+					" onclick="Laden_Als()">Lade als Datei</button>
+
+				</div>
 			</div>
 		</div>
 	</body>
@@ -455,6 +492,9 @@
 			L3 : false,
 			L4 : false,
 			L5 : false,
+			L6 : false,
+			L7 : false,
+			L8 : false,
 		};
 
 		let Multi = {
@@ -519,24 +559,54 @@
 					Costentext : `${Rebirth.Anzahl}/50 Rebirth`,
 					Costen : Rebirth.Anzahl,
 					Costen1 : 50,
-					Belonung : "Unendliche",
+					Belonung : "Rang 1",
 					Don : (Rebirth.Anzahl >= 50)}
 			}
 			if (Level.L5) {input = "L6"}
 			if (input == "L5") {
 				return {
 					Level : "4",
-					Costentext : `${Rebirth.Anzahl}/55 Rebirth`,
+					Costentext : `${Rebirth.Anzahl}/75 Rebirth`,
 					Costen : Rebirth.Anzahl,
-					Costen1 : 55,
-					Belonung : "Das Ende",
-					Don : (Rebirth.Anzahl >= 55)}
+					Costen1 : 75,
+					Belonung : "Rang 2",
+					Don : (Rebirth.Anzahl >= 75)}
+			}
+			if (Level.L6) {input = "L7"}
+			if (input == "L6") {
+				return {
+					Level : "5",
+					Costentext : `${Rebirth.Anzahl}/100 Rebirth`,
+					Costen : Rebirth.Anzahl,
+					Costen1 : 100,
+					Belonung : "Rang 3",
+					Don : (Rebirth.Anzahl >= 100)}
+			}
+			if (Level.L7) {input = "L8"}
+			if (input == "L7") {
+				return {
+					Level : "6",
+					Costentext : `${Rebirth.Anzahl}/150 Rebirth`,
+					Costen : Rebirth.Anzahl,
+					Costen1 : 150,
+					Belonung : "Rang 4",
+					Don : (Rebirth.Anzahl >= 150)}
+			}
+			if (Level.L8) {input = "L9"}
+			if (input == "L8") {
+				return {
+					Level : "7",
+					Costentext : `${Rebirth.Anzahl}/200 Rebirth`,
+					Costen : Rebirth.Anzahl,
+					Costen1 : 200,
+					Belonung : "Rang 5",
+					Don : (Rebirth.Anzahl >= 200)}
 			}
 			return {
 				Costentext : "Das Ende",
 				Costen : 0,
 				Costen1 : 1,
-				Belonung : "Das Unendliche",
+				Belonung : "",
 				Don : false,
 				Level : ""}
 		}
@@ -565,6 +635,7 @@
 
 
 			Status.Multi_max = Math.max(Status.Multi_max, Multi.Anzahl)
+			Status.Rebirth_max = Math.max(Status.Rebirth_max, Rebirth.Anzahl)
 
 
 
@@ -728,7 +799,7 @@
 			document.getElementById("I6").textContent = `Rebirth höstes: ${zahl(Status.Rebirth_max)}` ;
 			document.getElementById("I7").textContent = `Ultra Rebirth ingesamt: ${zahl(Status.S_Rebirth)}` ;
 			document.getElementById("I8").textContent = `Combo ingesamt: ${zahl(Status.Combo)}` ;
-			document.getElementById("I9").textContent = `Combo höstes: ${zahl(Status.Combo_max)}` ;
+			document.getElementById("I9").textContent = `Combo höstes: ${zahl(Status.Combo_max)}x` ;
 		};
 
 		let startclick = 0;
@@ -753,6 +824,8 @@
 			Status.Click += 1;
 			if (Crit_Multi > 1) {
 				document.getElementById("Click").textContent = `Click (Combo: ${Math.pow(2, Crit_Multi - 1)}x)`;
+				Status.Combo_max = Math.max(Status.Combo_max, Math.pow(2, Crit_Multi - 1))
+				Status.Combo += 1
 			} else {
 				document.getElementById("Click").textContent = `Click`;
 			}
@@ -817,6 +890,7 @@
 		function S_Rebirth_Buy() {
 			if (20 <= Rebirth.Anzahl) {
 				S_Rebirth.Anzahl += 1;
+				Status.S_Rebirth += 1
 				zurück()
 			}
 			update()
@@ -824,6 +898,7 @@
 		function S_Rebirth_Buy_2() {
 			if (50 <= Rebirth.Anzahl) {
 				S_Rebirth.Anzahl += 2;
+				Status.S_Rebirth += 2
 				zurück()
 			}
 			update()
@@ -835,6 +910,9 @@
 				if (!Level.L3) {Level.L3 = true; update(); return}
 				if (!Level.L4) {Level.L4 = true; update(); return}
 				if (!Level.L5) {Level.L5 = true; update(); return}
+				if (!Level.L6) {Level.L6 = true; update(); return}
+				if (!Level.L7) {Level.L7 = true; update(); return}
+				if (!Level.L8) {Level.L8 = true; update(); return}
 			}
 		}
 
@@ -875,6 +953,9 @@
 			localStorage.setItem(`V${Version} L3`, Level.L3);
 			localStorage.setItem(`V${Version} L4`, Level.L4);
 			localStorage.setItem(`V${Version} L5`, Level.L5);
+			localStorage.setItem(`V${Version} L6`, Level.L6);
+			localStorage.setItem(`V${Version} L7`, Level.L7);
+			localStorage.setItem(`V${Version} L8`, Level.L8);
 
 			localStorage.setItem(`V${Version} Multi Costen`, Multi.Costen);
 			localStorage.setItem(`V${Version} Multi Anzahl`, Multi.Anzahl);
@@ -902,6 +983,9 @@
 					L3 : (localStorage.getItem(`V${Version} L3`) == "true"),
 					L4 : (localStorage.getItem(`V${Version} L4`) == "true"),
 					L5 : (localStorage.getItem(`V${Version} L5`) == "true"),
+					L6 : (localStorage.getItem(`V${Version} L6`) == "true"),
+					L7 : (localStorage.getItem(`V${Version} L7`) == "true"),
+					L8 : (localStorage.getItem(`V${Version} L8`) == "true"),
 				}
 
 				Multi = {
@@ -943,6 +1027,54 @@
 				document.getElementById("Loaden").textContent = "Noch nicht gespeichert";
 			}
 			update()
+		}
+		function Speichern_Als() {
+			let josn = {
+				Coin : Coin,
+
+				Status : Status,
+				Level : Level,
+
+				Multi : Multi,
+				Rebirth : Rebirth,
+				S_Rebirth : S_Rebirth,
+
+				Crit : Crit,
+			}
+			const url = URL.createObjectURL(new Blob([JSON.stringify(josn)]))
+
+			const a = document.createElement("a");
+        	a.href = url;
+        	a.download = `Clicky v${Version}.max-game`;
+        	a.click();
+
+			URL.revokeObjectURL(url);
+		}
+		function Laden_Als() {
+			const input = document.createElement("input");
+			input.type = "file";
+			input.accept = ".max-game";
+
+			input.addEventListener("change", (event) => {
+				const file = event.target.files[0];
+
+				const reader = new FileReader();
+				reader.onload = () => {
+					const jsonData = JSON.parse(reader.result);
+					Coin = jsonData.Coin
+
+					Status = jsonData.Status
+					Level = jsonData.Level
+					Multi = jsonData.Multi
+					Rebirth = jsonData.Rebirth
+					S_Rebirth = jsonData.S_Rebirth
+
+					Crit = jsonData.Crit;
+					update()
+				}
+				reader.readAsText(file);
+			})
+			input.click();
 		}
 		let startTime;
 		function Z_Click() {startTime = Date.now();}
@@ -986,7 +1118,25 @@
 			} else {
 				if (event.key == "3") { Switch_S_Rebirth() }
 			}
+			if (event.key == "4") { Sammeln() }
 		})
+
+		function getViewportSize() {
+			let width = window.innerWidth;
+			let height = window.innerHeight;
+		
+			return { width, height };
+		}
+		function zoomToViewport(viewportSize) {
+			let zoomFactor = Math.min(1, viewportSize.width / (1920 / 2));
+			document.body.style.zoom = zoomFactor;
+		}
+		window.addEventListener("resize", function() {
+			let viewportSize = getViewportSize();
+			zoomToViewport(viewportSize);
+		 });
+		let viewportSize = getViewportSize();
+		zoomToViewport(viewportSize);
 
 
 		setInterval(Speichern, 1000)
