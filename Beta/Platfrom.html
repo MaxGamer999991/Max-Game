@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html style="overflow: hidden;">
+    <head>
+        <title>Test v0.0</title>
+    </head>
+    <body style="font-family: sans-serif;">
+        <div id="Objekt"></div>
+        <div id="Player" style="
+        position: absolute;
+        width: 50px;
+        height: 100px;
+        background: gray;
+        " onmousedown="Switch('Player')"></div>
+        <div style="
+		margin: 10px;
+		padding: 5px;
+		background: lightgrey;
+		border-radius: 10px;
+        width: 250px;
+        position: absolute;
+        " id="Dev">
+            <h3 style="
+            margin-block: 0px;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            background:darkgray">Dev</h3>
+
+            <div style="margin: 10px; display: flex; flex-wrap: nowrap;">
+                <p style="margin: 0; text-wrap: nowrap;">ID:</p>
+                <p style="margin:0; width: -webkit-fill-available;" id="ID"></p>
+            </div>
+            <div style="margin: 10px; display: flex; flex-wrap: nowrap;">
+                <p style="margin: 0; text-wrap: nowrap;">Name:</p>
+                <input type="text" style="width: -webkit-fill-available;" id="Name">
+            </div>
+            <div style="margin: 10px; display: flex; flex-wrap: nowrap;">
+                <p style="margin: 0; text-wrap: nowrap;">X1 / x:</p>
+                <input type="number" style="width: -webkit-fill-available;" id="X1">
+            </div>
+            <div style="margin: 10px; display: flex; flex-wrap: nowrap;">
+                <p style="margin: 0; text-wrap: nowrap;">Y1 / y:</p>
+                <input type="number" style="width: -webkit-fill-available;" id="Y1">
+            </div>
+            <div style="margin: 10px; display: flex; flex-wrap: nowrap;">
+                <p style="margin: 0; text-wrap: nowrap;">X2 / dx:</p>
+                <input type="number" style="width: -webkit-fill-available;" id="X2">
+            </div>
+            <div style="margin: 10px; display: flex; flex-wrap: nowrap;">
+                <p style="margin: 0; text-wrap: nowrap;">Y2 / dy:</p>
+                <input type="number" style="width: -webkit-fill-available;" id="Y2" v>
+            </div>
+            <div style="margin: 10px; display: flex; flex-wrap: nowrap;">
+                <p style="margin: 0; text-wrap: nowrap;">Style:</p>
+                <select style="width: -webkit-fill-available;" id="style">
+                    <option value="see">See</option>
+                    <option value="see only">See Only</option>
+                    <option value="hide">Hide</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+
+            <div style="margin: 0px; display: flex; flex-wrap: nowrap;">
+                <button style="margin: 10px; width: -webkit-fill-available;" onclick="newe()">Erstele</button>
+                <button style="margin: 10px; width: -webkit-fill-available;" onclick="dele()">Lösche</button>
+            </div>
+        </div>
+    </body>
+</html>
+<script>
+    let Dev = false;
+    let Flie = false;
+    let kamera = {
+        x : 0,
+    };
+    let Player = {
+        x  : 0,
+        y  : 100,
+        dx : 0,
+        dy : 0,
+        height : 100,
+        width : 50,
+        snik : false,
+        Sprung : 0,
+        Buffer : 0,
+    };
+    let Objekt = {
+        "O1": {
+            "name": "Start",
+            "x1": -100,
+            "y1": -10,
+            "x2": 100,
+            "y2": -100,
+            "Style": "see"
+        },
+        "O2": {
+            "name": "Neben Start",
+            "x1": 100,
+            "y1": 110,
+            "x2": 200,
+            "y2": -100,
+            "Style": "see"
+        },
+        "O3": {
+            "name": "",
+            "x1": 200,
+            "y1": 130,
+            "x2": 400,
+            "y2": 120,
+            "Style": "see"
+        },
+        "O4": {
+            "name": "",
+            "x1": -2000,
+            "y1": 90,
+            "x2": -1000,
+            "y2": 80,
+            "Style": "see"
+        },
+        "O5": {
+            "name": "",
+            "x1": -120,
+            "y1": 10,
+            "x2": -90,
+            "y2": 0,
+            "Style": "see"
+        },
+        "O6": {
+            "name": "",
+            "x1": -140,
+            "y1": 30,
+            "x2": -110,
+            "y2": 20,
+            "Style": "see"
+        },
+        "O7": {
+            "name": "",
+            "x1": -160,
+            "y1": 50,
+            "x2": -130,
+            "y2": 40,
+            "Style": "see"
+        },
+        "O8": {
+            "name": "",
+            "x1": -180,
+            "y1": 70,
+            "x2": -150,
+            "y2": 60,
+            "Style": "see"
+        },
+        "O9": {
+            "name": "",
+            "x1": 125,
+            "y1": 190,
+            "x2": 175,
+            "y2": 140,
+            "Style": "see only"
+        },
+        "O10": {
+            "name": "Hide",
+            "x1": -1000,
+            "y1": 90,
+            "x2": -200,
+            "y2": 80,
+            "Style": "hide"
+        }
+    }
+    let Auswahl = "";
+
+    function update() {
+        document.getElementById("Player").style.left    = ((window.innerWidth  / 2) + Player.x + (kamera.x - Player.x)) + "px";
+        document.getElementById("Player").style.top     = ((window.innerHeight / 2) - Player.y + (Player.snik ? 50 : 0)) + "px";
+        document.getElementById("Player").style.height  = (Player.snik ? 50 : 100) + "px";
+        document.getElementById("Dev").style.display    = Dev ? "block" : "none";
+
+        Player.x += Player.dx;
+        let Hit_dx = false;
+        for (const I in Objekt) {
+            if (Objekt[I] == null) {continue}
+            if (Objekt[I].Style == "none" || Objekt[I].Style == "see only") {continue}
+            if ((Objekt[I].x1 < (Player.x + 50) && Objekt[I].x2 > Player.x)   &&   (Objekt[I].y1 > (Player.y - 100) && Objekt[I].y2 < (Player.y - (Player.snik ? 50 : 0)))) {
+                Player.x -= Player.dx;
+                Player.dx /= 2;
+                Hit_dx = true;
+            }
+        }
+        Player.y += Player.dy;
+        let Hit_dy = false;
+        for (const I in Objekt) {
+            if (Objekt[I] == null) {continue}
+            if (Objekt[I].Style == "none" || Objekt[I].Style == "see only") {continue}
+            if ((Objekt[I].x1 < (Player.x + 50) && Objekt[I].x2 > Player.x)   &&   (Objekt[I].y1 > (Player.y - 100) && Objekt[I].y2 < (Player.y - (Player.snik ? 50 : 0)))) {
+                Player.y -= Player.dy;
+                Player.dy /= 2;
+                Hit_dy = true;
+            }
+        }
+
+        if (Schift) {
+            Player.snik = true
+        } else {
+            Player.snik = false;
+            for (const I in Objekt) {
+                if (Objekt[I] == null) {continue}
+                if (Objekt[I].Style == "none" || Objekt[I].Style == "see only") {continue}
+                if ((Objekt[I].x1 < (Player.x + 50) && Objekt[I].x2 > Player.x)   &&   (Objekt[I].y1 > (Player.y - 100) && Objekt[I].y2 < Player.y)) {
+                    Player.snik = true;
+                }
+            }
+        }
+
+
+        kamera.x += Player.dx;
+        kamera.x /= 1.1;
+
+
+        let ii = "";
+        let hit = false;
+        for (const I in Objekt) {
+            if (Objekt[I] == null) {continue}
+            if (Objekt[I].Style == "none") {continue}
+            ii += `<div style="
+            position: absolute;
+            width: ${Math.abs(Objekt[I].x1 - Objekt[I].x2)}px;
+            height: ${Math.abs(Objekt[I].y1 - Objekt[I].y2)}px;
+            left: ${(window.innerWidth / 2) + Objekt[I].x1 - (Dev && Auswahl == I ? 5 : 0) + (kamera.x - Player.x)}px;
+            top: ${(window.innerHeight / 2) - Objekt[I].y1 - (Dev && Auswahl == I ? 5 : 0)}px;
+            background: ${Objekt[I].Style == "hide" ? "white" : (Objekt[I].Style == "see" ? "darkgray" : "lightgray")};
+            ${Dev && Auswahl == I ? "border-width: 5px; border-color: black; border-style: dashed;" : ""}
+            " onmousedown="Switch('${I}')"></div>`;
+        }
+        document.getElementById("Objekt").innerHTML = ii;
+
+
+        if (!Flie) {Player.dy -= 0.2;}
+        else {
+            if (Up)   {Player.dy += 5};
+            if (Down) {Player.dy -= 5};
+            Player.dy /= 2;
+        }
+        Player.Buffer -= 1;
+        if (Hit_dy) {Player.Sprung = 1, Player.Buffer = 0.1 * 60}
+        if ((!(Player.Buffer > 0) && Player.Sprung > 0) && ((Space && P_Space) || (Up && P_Up))) {Player.dy = 5; Player.Sprung -= 1;}
+        if (  (Player.Buffer > 0)                       && ( Space             ||  Up         )) {Player.dy = 5; Player.Buffer = 0}
+
+        
+        if (Left)  {Player.dx -= (Player.snik ? 0.2 : 1) * (Hit_dy ? 1 : 0.65);}
+        if (Right) {Player.dx += (Player.snik ? 0.2 : 1) * (Hit_dy ? 1 : 0.65);}
+        Player.dx /= 1.1;
+
+
+        while (Player.y >  (window.innerHeight / 2)) {Player.y -= window.innerHeight};
+        while (Player.y < -(window.innerHeight / 2)) {Player.y += window.innerHeight};
+
+        P_Space  = !Space;
+        P_Schift = !Schift;
+        P_Up     = !Up;
+        P_Down   = !Down;
+        P_Left   = !Left;
+        P_Right  = !Right;
+    }
+    function Switch(input) {
+        Auswahl = input;
+        if (Auswahl == "") {
+            document.getElementById("ID").textContent = "";
+            document.getElementById("Name").value = "";
+            document.getElementById("X1").value = "";
+            document.getElementById("Y1").value = "";
+            document.getElementById("X2").value = "";
+            document.getElementById("Y2").value = "";
+            document.getElementById("style").value = "";
+            return
+        }
+        if (Auswahl == "Player") {return}
+        document.getElementById("ID").textContent = String(Auswahl);
+        document.getElementById("Name").value = Objekt[Auswahl].name;
+        document.getElementById("X1").value = Objekt[Auswahl].x1;
+        document.getElementById("Y1").value = Objekt[Auswahl].y1;
+        document.getElementById("X2").value = Objekt[Auswahl].x2;
+        document.getElementById("Y2").value = Objekt[Auswahl].y2;
+        document.getElementById("style").value = Objekt[Auswahl].Style;
+        
+        function uupdate() {
+            if (Auswahl == "") {return}
+            if (Auswahl == "Player") {
+                document.getElementById("ID").textContent = "Player";
+                document.getElementById("Name").value = "Me";
+                document.getElementById("X1").value = Player.x;
+                document.getElementById("Y1").value = Player.y;
+                document.getElementById("X2").value = Player.dx;
+                document.getElementById("Y2").value = Player.dy;
+                document.getElementById("style").value = "see";
+                return
+            }
+            Objekt[Auswahl].name  = document.getElementById("Name").value;
+            Objekt[Auswahl].x1    = Number(document.getElementById("X1").value);
+            Objekt[Auswahl].y1    = Number(document.getElementById("Y1").value);
+            Objekt[Auswahl].x2    = Number(document.getElementById("X2").value);
+            Objekt[Auswahl].y2    = Number(document.getElementById("Y2").value);
+            Objekt[Auswahl].Style = document.getElementById("style").value;
+        };
+
+        document.getElementById("Name" ).addEventListener("change", () => {uupdate});
+        document.getElementById("X1"   ).addEventListener("change", () => {uupdate});
+        document.getElementById("Y1"   ).addEventListener("change", () => {uupdate});
+        document.getElementById("X2"   ).addEventListener("change", () => {uupdate});
+        document.getElementById("Y2"   ).addEventListener("change", () => {uupdate});
+        document.getElementById("style").addEventListener("change", () => {uupdate});
+
+        setInterval(uupdate, (1 / 30) * 1000);
+    };
+    function newe() {
+        let i = 1;
+        for (const asd in Objekt) {
+            if (Objekt[asd] == null) {break}
+            i ++;
+        }
+        eval(`Objekt.O${i} = {
+            name : "",
+            x1 : -10,
+            y1 : 130,
+            x2 : 10,
+            y2 : 110,
+            Style : "see",
+        }`);
+        Switch("O" + i)
+    }
+    function dele() {
+        if (Auswahl == "Player" || Auswahl == "") {return}
+        Objekt[Auswahl] = null
+        Switch("")
+    }
+
+    setInterval(update, (1 / 60) * 1000);
+
+    let Space  = false;
+    let Schift = false;
+    let Up     = false;
+    let Down   = false;
+    let Left   = false;
+    let Right  = false;
+
+    let Strg   = false;
+
+    let P_Space  = false;
+    let P_Schift = false;
+    let P_Up     = false;
+    let P_Down   = false;
+    let P_Left   = false;
+    let P_Right  = false;
+    addEventListener("keydown", function(event) {
+        if (event.code == "Space") {Space  = true};
+        if (event.key == "Shift" ) {Schift = true};;
+        if (event.code == "KeyW" ) {Up     = true};
+        if (event.code == "KeyS" ) {Down   = true};
+        if (event.code == "KeyA" ) {Left   = true};
+        if (event.code == "KeyD" ) {Right  = true};
+        if (event.code == "Escape") {
+            Player = {
+            x  : 0,
+            y  : 100,
+            dx : 0,
+            dy : 0,
+            }};
+        if (event.key == "1" && Strg) {Dev = !Dev};
+        if (event.key == "2" && Strg) {Flie = !Flie};
+        if (event.key == "Control") {Strg = true};
+    });
+    addEventListener("keyup", function(event) {
+        if (event.code == "Space") {Space  = false};
+        if (event.key == "Shift" ) {Schift = false};
+        if (event.code == "KeyW" ) {Up     = false};
+        if (event.code == "KeyS" ) {Down   = false};
+        if (event.code == "KeyA" ) {Left   = false};
+        if (event.code == "KeyD" ) {Right  = false};
+        if (event.key == "Control") {Strg  = false};
+    });
+</script>

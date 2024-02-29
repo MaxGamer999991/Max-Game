@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html style="touch-action: manipulation; zoom: 1.5; overflow-y: scroll;">
 	<head>
-		<title>Clicky v6.0</title>
+		<title>Clicky v5.0</title>
 		<link rel="icon" href="https://lh3.google.com/u/0/d/1Z3uYexZ2Xtkv4exeuNPiIAOQrXvp9lVW=w960-h518-iv1">
 	</head>
-	<body style="font-family: sans-serif;">
+	<body style="font-family: sans-serif; min-width: 530px;">
 		<h1>Willkommen bei Clicky</h1>
-		<p style="margin-top: -30px;">Version: 6.0</p>
+		<p style="margin-top: -30px;">Version: 5.0</p>
 
 
 		<div style="margin-block: 10px;">
@@ -467,46 +467,11 @@
 		</div>
 	</body>
 	<script>
-		let Game = {
-			Coin : 0,
-
-			Multi : {
-				Open : false,
-				Cost : 10,
-				Amount : 0,
-				Total : 0,
-				AutoBuy : false,
-			},
-			Rebirth : {
-				Open : false,
-				Cost : 160,
-				Amount : 0,
-				Total : 0,
-				BuySame : 1,
-				AutoBuy : false,
-			},
-			UltraRebirth : {
-				Open : false,
-				Amount : 0,
-				Total : 0,
-				BuySame : 1,
-				AutoBuy : false,
-			},
-			UltraRebirthBar : {
-				Open : false,
-				Amount : 0,
-				Total : 0,
-				BuySame : 1,
-			},
-
-			Combo : {
-				Must : 0,
-				Chance : 0,
-			},
-
-			Settings : false,
-			Shop : false,
-		}
+		let Coin = 0
+	
+		let Eistelungen = false;
+		let Lade = false;
+		let Keymenü = false;
 
 		let Status = {
 			Coin : 0,
