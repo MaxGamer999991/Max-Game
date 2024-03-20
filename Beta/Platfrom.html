@@ -245,8 +245,8 @@
         if (  (Player.Buffer > 0)                       && ( Space             ||  Up         )) {Player.dy = 5; Player.Buffer = 0}
 
         
-        if (Left)  {Player.dx -= (Player.snik ? 0.2 : 1) * (Hit_dy ? 1 : 0.65);}
-        if (Right) {Player.dx += (Player.snik ? 0.2 : 1) * (Hit_dy ? 1 : 0.65);}
+        if (Left)  {Player.dx -= (Player.snik ? 0.2 : 1) * (Hit_dy ? 1 : 0.75);}
+        if (Right) {Player.dx += (Player.snik ? 0.2 : 1) * (Hit_dy ? 1 : 0.75);}
         Player.dx /= 1.1;
 
 

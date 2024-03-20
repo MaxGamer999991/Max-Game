@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>-- v0.0</title>
+    </head>
+    <body style="background-color: black; margin: 0; overflow: hidden; font-family: sans-serif;">
+        <canvas style="
+        width: 1280px;
+        height: 720px;
+        background-color: dimgray;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        " id="Game"></canvas>
+    </body>
+</html>
+<script>
+    let Up    = false; let Up_Key    = "KeyW"
+    let Left  = false; let Left_Key  = "KeyA"
+    let Down  = false; let Down_Key  = "KeyS"
+    let Right = false; let Right_Key = "KeyD"
+
+    let x = 0;
+    let y = 0;
+
+    const Game = document.getElementById("Game")
+    
+
+    let Objekte = {
+        "O1" : {
+            "x1" : 10,
+            "y1" : 10,
+            "x2" : 10,
+            "y2" : 10,
+            "x3" : 0,
+            "y3" : 10,
+        },
+    }
+    function Ray() {
+        for (const i in Objekte) {
+            let mitte
+            if () {return}
+        }
+        return -1
+    }
+    function Render() {
+        Game.innerHTML = ""
+        for (const i in Objekte) {
+            Game.innerHTML += `
+                <div style="
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                left: ${}"></div>`
+        }
+    }
+    
+
+
+    setInterval(() => {
+        if (window.innerHeight / 72 > window.innerWidth / 1280) {
+            Game.style.zoom = window.innerWidth / 1280
+        } else {
+            Game.style.zoom = window.innerHeight / 720
+        }
+    })
+    addEventListener("keydown", function(event) {
+        if (event.code == Up_Key   ) {Up = true};
+        if (event.code == Left_Key ) {Left = true};
+        if (event.code == Down_Key ) {Down = true};
+        if (event.code == Right_Key) {Right = true};
+    });
+    addEventListener("keyup", function(event) {
+        if (event.code == Up_Key   ) {Up  = false};
+        if (event.code == Left_Key ) {Left  = false};
+        if (event.code == Down_Key ) {Down  = false};
+        if (event.code == Right_Key) {Right  = false};
+    });
+</script>

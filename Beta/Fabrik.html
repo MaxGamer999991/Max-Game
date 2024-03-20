@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fabrik v0.0</title>
+    </head>
+    <body style="background-color: black; margin: 0; overflow: hidden; font-family: sans-serif;">
+        <div style="
+        width: 1280px;
+        height: 720px;
+        background-color: dimgray;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        " id="Game"></div>
+    </body>
+</html>
+<script>
+    let Up    = false; let Up_Key    = "KeyW"
+    let Left  = false; let Left_Key  = "KeyA"
+    let Down  = false; let Down_Key  = "KeyS"
+    let Right = false; let Right_Key = "KeyD"
+
+    let dx = 0;
+    let dy = 0;
+    let x  = 0;
+    let y  = 0;
+    setInterval(() => {
+        if (window.innerHeight / 720 > window.innerWidth / 1280) {
+            document.getElementById("Game").style.zoom = window.innerWidth / 1280
+        } else {
+            document.getElementById("Game").style.zoom = window.innerHeight / 720
+        }
+        document.getElementById("Game").innerHTML = ""
+        // Player
+        document.getElementById("Game").innerHTML += `<div style='width: 50px; height: 100px; background-color: gray; position: absolute; top: ${(720 / 2) - y}px; left: ${(1280 / 2) + x}px; transform: translate(-50%, -100%)'></div>`
+        dy = (Up ? 1 : 0) - (Down ? 1 : 0)
+        dx = (Right ? 1 : 0) - (Left ? 1 : 0)
+        x += dx
+        y += dy
+    })
+    addEventListener("keydown", function(event) {
+        if (event.code == Up_Key   ) {Up = true};
+        if (event.code == Left_Key ) {Left = true};
+        if (event.code == Down_Key ) {Down = true};
+        if (event.code == Right_Key) {Right = true};
+    });
+    addEventListener("keyup", function(event) {
+        if (event.code == Up_Key   ) {Up  = false};
+        if (event.code == Left_Key ) {Left  = false};
+        if (event.code == Down_Key ) {Down  = false};
+        if (event.code == Right_Key) {Right  = false};
+    });
+</script>
