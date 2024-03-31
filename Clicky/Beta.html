@@ -1,1181 +1,308 @@
 <!DOCTYPE html>
-<html style="touch-action: manipulation; zoom: 1.5; overflow-y: scroll;">
+<html style="font-family: sans-serif; touch-action: manipulation; zoom: 1.5; overflow-y: scroll;">
 	<head>
 		<title>Clicky v6.0</title>
 		<link rel="icon" href="https://lh3.google.com/u/0/d/1Z3uYexZ2Xtkv4exeuNPiIAOQrXvp9lVW=w960-h518-iv1">
 	</head>
-	<body style="font-family: sans-serif;">
-		<h1>Willkommen bei Clicky</h1>
-		<p style="margin-top: -30px;">Version: 6.0</p>
-
-
-		<div style="margin-block: 10px;">
-			<h2 style="margin-block: -2px;" id="Coin">Coin: 0</h2>
-			<p  style="margin-block: 0px;"  id="Power">Power: 1</p>
-		</div>
-
-
-		<button style="
-		touch-action: none;
-		font-size: x-large;
-		padding-block: 20px;
-		width: -webkit-fill-available;
-		margin: 10px;
-		cursor: crosshair;
-		border: gray;
-		border-width: 5px;
-		border-style: solid;
-		border-radius: 20px;
-		" id="Click" onclick="Click()">Click</button>
-
-
-		<div style="display: flex; flex-direction: row;">
-		<div style="display: flex; flex-direction: column; min-width: 210px; max-width: 210px;">
-			<div style="
+	<style>
+		.Fenster {
 			margin: 10px;
 			padding: 5px;
-			background: lightgrey;
+			background-color: lightgray;
 			border-radius: 10px;
-			min-width: 150px;">
-				<h3 style="
-				margin-block: 0px;
-				padding: 10px;
-				cursor: pointer;
-				border-radius: 10px;
-				background:darkgray
-				" id="Multi" onclick="Switch_Multi()">Multi</h3>
-				<div style="margin: 10px;" id="Multi Anzeige">
-					<p style="margin: 0px;" id="Multi Costen">Kosten: 10</p>
-					<p style="margin: 0px;" id="Multi Anzahl">Anzahl: 1</p>
-				</div>
-
-				<div style="display: flex; flex-direction: column;">
-					<button style="
-					margin: 2px;
-					font-size: large;
-					border: darkgray;
-					border-width: 3px;
-					border-style: solid;
-					border-radius: 10px;
-					cursor: pointer;
-					" id="Multi Kauf" onclick="if (Level.L1) {Multi_Max()} else {Multi_Buy()}">Kaufen</button>
-
-
-					<button style="
-					margin: 2px;
-					font-size: large;
-					border: darkgray;
-					border-width: 3px;
-					border-style: solid;
-					border-radius: 10px;
-					cursor: pointer;
-					" id="Multi Auto" onclick="Multi_Auto()">Auto Kaufen</button>
-				</div>
-			</div>
-
-
-
-			<div style="
-			margin: 10px;
-			padding: 5px;
-			background: lightgrey;
-			border-radius: 10px;
-			min-width: 150px;">
-				<h3 style="
-				margin-block: 0px;
-				padding: 10px;
-				cursor: pointer;
-				border-radius: 10px;
-				background:darkgray
-				" id="Rebirth" onclick="Switch_Rebirth()">Rebirth</h3>
-				<div style="margin: 10px;" id="Rebirth Anzeige">
-					<p style="margin: 0px;" id="Rebirth Costen">Kosten: 160</p>
-					<p style="margin: 0px;" id="Rebirth Anzahl">Anzahl: 0</p>
-				</div>
-				<div style="display: flex; flex-direction: column;">
-					<button style="
-					margin: 2px;
-					font-size: large;
-					border: darkgray;
-					border-width: 3px;
-					border-style: solid;
-					border-radius: 10px;
-					cursor: pointer;
-					" id="Rebirth Kauf" onclick="Rebirth_Buy()">Kaufen</button>
-
-					<button style="
-					margin: 2px;
-					font-size: large;
-					border: darkgray;
-					border-width: 3px;
-					border-style: solid;
-					border-radius: 10px;
-					cursor: pointer;
-					" id="Rebirth Auto" onclick="Rebirth_Auto()">Auto Kaufen</button>
-				</div>
-			</div>
-
-
-
-			<div style="
-			margin: 10px;
-			padding: 5px;
-			background: lightgrey;
-			display: none;
-			border-radius: 10px;
-			min-width: 150px;
-			" id="Super Rebirth">
-				<h3 style="
-				margin: 0px;
-				padding: 10px;
-				cursor: pointer;
-				border-radius: 10px;
-				background:darkgray
-				" id="S Rebirth" onclick="Switch_S_Rebirth()">Ultra Rebirth</h3>
-				<div style="margin: 10px;" id="S Rebirth Anzeige">
-					<p style="margin: 0px;" id="S Rebirth Costen">Kosten: 20 Rebirth</p>
-					<p style="margin: 0px;" id="S Rebirth Costen 2">Kosten 2x: 50 Rebirth</p>
-					<p style="margin: 0px;" id="S Rebirth Anzahl">Anzahl: 0</p>
-				</div>
-				<div style="display: flex; flex-direction: column;">
-					<button style="
-					margin: 2px;
-					padding-inline: 20px;
-					font-size: large;
-					border: darkgray;
-					border-width: 3px;
-					border-style: solid;
-					border-radius: 10px;
-					cursor: pointer;
-					" id="S Rebirth Kauf" onclick="S_Rebirth_Buy()">Kaufen</button>
-					<button style="
-					margin: 2px;
-					padding-inline: 20px;
-					font-size: large;
-					border: darkgray;
-					border-width: 3px;
-					border-style: solid;
-					border-radius: 10px;
-					cursor: pointer;
-					" id="S Rebirth Kauf 2" onclick="S_Rebirth_Buy_2()">Kaufen 2x</button>
-				</div>
-			</div>
-		</div>
-		<div style="
-		width: -webkit-fill-available;
-		min-width: 280px;
-		margin: 10px;
-		padding: 5px;
-		background: lightgrey;
-		border-radius: 10px;">
-			<h3 style="
-			margin: 0px;
+		}
+		.Head {
+			margin-block: 0px;
 			padding: 10px;
+			cursor: pointer;
 			border-radius: 10px;
-			background:darkgray
-			">Shop</h3>
-
-			<div id="Shop in">
-				<p style="margin: 10px; margin-top: 20px;">Kosten: 1 Ultra Redirth</p>
-
-				<div style="
-				margin: 5px;
-				padding: 5px;
-				background-color: darkgray;
-				display: inline-flex;
-				align-items: center;
-				border-radius: 10px;">
-					<p style="
-					margin: 2px;
-					text-wrap: nowrap;
-					">Rabatt Multi:</p>
-					<p id="s2" style="
-					margin-block: 0px;
-					margin-inline: 5px;
-					text-wrap: nowrap;
-					"></p>
-					<button style="
-					margin: 0px;
-					padding-inline: 20px;
-					font-size: large;
-					border: dimgray;
-					border-width: 3px;
-					border-style: solid;
-					border-radius: 10px;
-					cursor: pointer;
-					" onclick="if (S_Rebirth.Anzahl >= 1) {S_Rebirth.Anzahl -= 1; Multi.Rabat += 5; update()}">Kaufen</button>
-				</div>
-				<div style="
-				margin: 5px;
-				padding: 5px;
-				background-color: darkgray;
-				display: inline-flex;
-				align-items: center;
-				border-radius: 10px;">
-					<p style="
-					margin: 2px;
-					text-wrap: nowrap;
-					">Rabatt Rebirth:</p>
-					<p id="s3" style="
-					margin-block: 0px;
-					margin-inline: 5px;
-					text-wrap: nowrap;
-					"></p>
-					<button style="
-					margin: 0px;
-					padding-inline: 20px;
-					font-size: large;
-					border: dimgray;
-					border-width: 3px;
-					border-style: solid;
-					border-radius: 10px;
-					cursor: pointer;
-					" onclick="if (S_Rebirth.Anzahl >= 1) {S_Rebirth.Anzahl -= 1; Rebirth.Rabat+= 5; update()}">Kaufen</button><br>
-				</div>
-				<div style="
-				margin: 5px;
-				padding: 5px;
-				background-color: darkgray;
-				display: inline-flex;
-				align-items: center;
-				border-radius: 10px;">
-					<p style="
-					margin: 2px;
-					text-wrap: nowrap;
-					">Crit Combo:</p>
-					<p id="s4" style="
-					margin-block: 0px;
-					margin-inline: 5px;
-					text-wrap: nowrap;
-					"></p>
-					<button style="
-					margin: 0px;
-					padding-inline: 20px;
-					font-size: large;
-					border: dimgray;
-					border-width: 3px;
-					border-style: solid;
-					border-radius: 10px;
-					cursor: pointer;
-					" onclick="if (S_Rebirth.Anzahl >= 1) {S_Rebirth.Anzahl -= 1; Crit += 5; update()}">Kaufen</button>
-				</div>
-			</div>
-			<div style="
-			display: flex;
-			height: 160px;
-			align-items: center;
-			justify-content: center;
-			" id="Shop out">
-				<p style="margin: 0; font-size: xx-large;">- Level 2 -</p>
-			</div>
-		</div>
-		</div>
-
-		
-		<div style="
-		margin: 10px;
-		padding: 5px;
-		background: lightgrey;
-		border-radius: 10px;">
-			<div style="
-			margin: 0px;
-			padding: 10px;
-			border-radius: 10px;
-			background:darkgray;
-			display: flex;
-			">
-				<h3 style="
-				margin: 0px;
-				width: 80px;
-				" id="Level">Level 0</h3>
-				<progress max="10" value="0" style="
-				margin-left: 10px;
-				direction: ltr;
-				height: 22px;
-				width: -webkit-fill-available;
-				accent-color: forestgreen;
-				" id="Level Bar"></progress>
-			</div>
-			<div style="margin: 10px;" id="Level Anzeige">
-				<p style="margin: 0px;" id="Level Forderungen">Forderungen: 0/5 Redirth</p>
-				<p style="margin: 0px;" id="Level Belonung">Belohnung: Max Multi Buy, Auto Rebirth</p>
-			</div>
-			<button style="
-			margin: 10px;
-			padding-inline: 20px;
+			background: darkgray;
+		}
+		.Button {
+			margin: 2px;
 			font-size: large;
 			border: darkgray;
 			border-width: 3px;
 			border-style: solid;
 			border-radius: 10px;
 			cursor: pointer;
-			" id="Level Button" onclick="Sammeln()">Sammeln</button>
+		}
+	</style>
+	<body>
+		<div>
+
 		</div>
+		<h1 style="text-align: center;">Clicky</h1>
 
-
-		<div style="
-		margin: 10px;
-		padding: 5px;
-		background: lightgrey;
-		border-radius: 10px;
-		display: flex;
-		">
-			<div style="
-			width: -webkit-fill-available;
-			margin-right: 10px;
-			">
-				<h3 style="
-				margin: 0px;
-				padding: 10px;
-				cursor: pointer;
-				border-radius: 10px;
-				background:darkgray
-				" onclick="Switch_Keymenü()">Infos</h3>
-				<div style="
-				margin: 0px;
-				margin-block: 10px;
-				padding: 10px;
-				">
-					<p id="I1" style="margin-top:  0px; margin-bottom: 0px;"></p>
-					<p id="I2" style="margin-top:  0px; margin-bottom: 0px;"></p>
-					<p id="I3" style="margin-top: 10px; margin-bottom: 0px;"></p>
-					<p id="I4" style="margin-top:  0px; margin-bottom: 0px;"></p>
-					<p id="I5" style="margin-top: 10px; margin-bottom: 0px;"></p>
-					<p id="I6" style="margin-top:  0px; margin-bottom: 0px;"></p>
-					<p id="I7" style="margin-top: 10px; margin-bottom: 0px;"></p>
-					<p id="I8" style="margin-top: 10px; margin-bottom: 0px;"></p>
-					<p id="I9" style="margin-top:  0px; margin-bottom: 0px;"></p>
-				</div>
+		<div>
+			<div>
+				<button>Speichern Cloud</button>
+				<button>Laden Cloud</button>
 			</div>
-			<div style="
-			margin-left: 10px;
-			min-width: 300px;
-			max-width: 300px;
-			">
-				<h3 style="
-				margin: 0px;
-				padding: 10px;
-				cursor: pointer;
-				border-radius: 10px;
-				background:darkgray
-				" onclick="Switch_Keymenü()">Key</h3>
-				<div style="
-				margin: 0px;
-				margin-block: 10px;
-				padding: 10px;
-				border-radius: 10px;
-				background:darkgray
-				">
-					<p style="margin-top: 0px;">1 = Open Multi / Buy Multi</p>
-					<p>2 = Open Rebirth / Buy Rebirth</p>
-					<p>3 = Open U Rebirth / Buy U Rebirth</p>
-					<p style="margin-block: 0px;">4 = Sammeln Level</p>
-				</div>
+			<div>
+				<button>Speichern Datai</button>
+				<button>Laden Datai</button>
 			</div>
 		</div>
 
-
-		<div style="
-		margin: 10px;
-		padding: 5px;
-		background: lightgrey;
-		border-radius: 10px;">
-			<h3 style="
-			margin: 0px;
-			padding: 10px;
-			cursor: pointer;
-			border-radius: 10px;
-			background:darkgray
-			" onclick="Switch_Einstelung()">Einstellungen</h3>
-
+		<div>
 			<div style="
-			margin: 5px;
-			flex-direction: column;
-			" id="sammlung">
-
-				<div style="
+				position: fixed;
 				display: flex;
-				">
-
-					<button style="
-					margin: 5px;
-					padding-inline: 20px;
-					font-size: large;
-					border: darkgray;
-					border-width: 3px;
-					border-style: solid;
-					border-radius: 10px;
-					cursor: pointer;
-					background-color: lightgrey;
-					" onclick="Speichern()">Speichern</button>
-
-					<button style="
-					margin: 5px;
-					padding-inline: 20px;
-					font-size: large;
-					border: darkgray;
-					border-width: 3px;
-					border-style: solid;
-					border-radius: 10px;
-					cursor: pointer;
-					background-color: lightgrey;
-					" id="Loaden" onclick="Laden()">Laden</button>
-
-					<button style="
-					margin: 5px;
-					padding-inline: 20px;
-					font-size: large;
-					border: darkgray;
-					border-width: 3px;
-					border-style: solid;
-					border-radius: 10px;
-					cursor: pointer;
-					background-color: red;
-					" onmousedown="Z_Click();" onmouseup="Zurücksetzen()">Alles Zurücksetzen</button>
-
-				</div>
-				<div style="
-				display: flex;
-				">
-
-					<button style="
-					margin: 5px;
-					padding-inline: 20px;
-					font-size: large;
-					border: darkgray;
-					border-width: 3px;
-					border-style: solid;
-					border-radius: 10px;
-					cursor: pointer;
-					background-color: lightgrey;
-					" onclick="Speichern_Als()">Speichern als Datei</button>
-
-					<button style="
-					margin: 5px;
-					padding-inline: 20px;
-					font-size: large;
-					border: darkgray;
-					border-width: 3px;
-					border-style: solid;
-					border-radius: 10px;
-					cursor: pointer;
-					background-color: lightgrey;
-					" onclick="Laden_Als()">Lade als Datei</button>
-
-				</div>
+				padding-block: 5px;
+				justify-content: center;
+				left: 0px;
+				right: 0px;
+				bottom: 0px;
+				background: lightgray;
+			">
+				<button style="position: relative; bottom: 0px;" id="Tab_I1" onclick="Auswahl = 1; update()" class="Button">Home</button>
+				<button style="position: relative; bottom: 0px;" id="Tab_I2" onclick="Auswahl = 2; update()" class="Button">Upgrade</button>
+				<button style="position: relative; bottom: 0px;" id="Tab_I3" onclick="Auswahl = 3; update()" class="Button">Shop</button>
+				<button style="position: relative; bottom: 0px;" id="Tab_I4" onclick="Auswahl = 4; update()" class="Button">Level</button>
+				<button style="position: relative; bottom: 0px;" id="Tab_I5" onclick="Auswahl = 5; update()" class="Button">Rang</button>
+				<button style="position: relative; bottom: 0px;" id="Tab_I6" onclick="Auswahl = 6; update()" class="Button">Einstelung</button>
 			</div>
 		</div>
 	</body>
-	<script>
-		let Game = {
-			Coin : 0,
+</html>
+<script>
 
-			Multi : {
-				Open : false,
-				Cost : 10,
-				Amount : 0,
-				Total : 0,
-				AutoBuy : false,
-			},
-			Rebirth : {
-				Open : false,
-				Cost : 160,
-				Amount : 0,
-				Total : 0,
-				BuySame : 1,
-				AutoBuy : false,
-			},
-			UltraRebirth : {
-				Open : false,
-				Amount : 0,
-				Total : 0,
-				BuySame : 1,
-				AutoBuy : false,
-			},
-			UltraRebirthBar : {
-				Open : false,
-				Amount : 0,
-				Total : 0,
-				BuySame : 1,
-			},
+	var Auswahl = 1;
+	var Game = {
+		Coin : 0,
 
-			Combo : {
-				Must : 0,
-				Chance : 0,
-			},
-
-			Settings : false,
-			Shop : false,
-		}
-
-		let Status = {
+		Eistelungen : false,
+		Status : {
 			Coin : 0,
 			Click : 0,
 			Multi : 0,
 			Multi_max : 0,
 			Rebirth : 0,
 			Rebirth_max : 0,
-			S_Rebirth : 0,
+			S_Coin : 0,
 			Combo : 0,
 			Combo_max : 0,
-		}
+		},
 
-		let Level = {
+		Multi : {
 			Offen : false,
-			L1 : false,
-			L2 : false,
-			L3 : false,
-			L4 : false,
-			L5 : false,
-			L6 : false,
-			L7 : false,
-			L8 : false,
-		};
-
-		let Multi = {
-			Offen : false,
+			Anzahl : 1,
 			Costen : 10,
 			Rabat : 0,
-			Anzahl : 1,
-			Auto : false,
-		};
-
-		let Rebirth = {
+			Auto : false
+		},
+		Rebirt : {
 			Offen : false,
+			Anzahl : 0,
 			Costen : 160,
 			Rabat : 0,
-			Anzahl : 0,
-			Auto : false,
-		};
-		let S_Rebirth = {
+			Auto : false
+		},
+
+		Level : 0,
+
+		S_Coin : {
 			Offen : false,
 			Anzahl : 0,
-		};
+			Auto : false
+		},
 
-		let Crit = 0;
+		Crit : 0,
+	}
 
-
-		function Level_() {
-			input = "L1";
-			if (Level.L1) {input = "L2"}
-			if (input == "L1") {
-				return {
-					Level : "0",
-					Costentext : `${Rebirth.Anzahl}/5 Rebirth`,
-					Costen : Rebirth.Anzahl,
-					Costen1 : 5,
-					Belonung : "Multi Alles Kaufen, Automatisch Rebirth",
-					Don : (Rebirth.Anzahl >= 5)}
-			}
-			if (Level.L2) {input = "L3"}
-			if (input == "L2") {
-				return {
-					Level : "1",
-					Costentext : `${Rebirth.Anzahl}/15 Rebirth`,
-					Costen : Rebirth.Anzahl,
-					Costen1 : 15,
-					Belonung : "Auto Multi Kaufen, Laden",
-					Don : (Rebirth.Anzahl >= 15)}
-			}
-			if (Level.L3) {input = "L4"}
-			if (input == "L3") {
-				return {
-					Level : "2",
-					Costentext : `${Rebirth.Anzahl}/25 Rebirth`,
-					Costen : Rebirth.Anzahl,
-					Costen1 : 25,
-					Belonung : "Super Rebirth",
-					Don : (Rebirth.Anzahl >= 25)}
-			}
-			if (Level.L4) {input = "L5"}
-			if (input == "L4") {
-				return {
-					Level : "3",
-					Costentext : `${Rebirth.Anzahl}/50 Rebirth`,
-					Costen : Rebirth.Anzahl,
-					Costen1 : 50,
-					Belonung : "Rang 1",
-					Don : (Rebirth.Anzahl >= 50)}
-			}
-			if (Level.L5) {input = "L6"}
-			if (input == "L5") {
-				return {
-					Level : "4",
-					Costentext : `${Rebirth.Anzahl}/75 Rebirth`,
-					Costen : Rebirth.Anzahl,
-					Costen1 : 75,
-					Belonung : "Rang 2",
-					Don : (Rebirth.Anzahl >= 75)}
-			}
-			if (Level.L6) {input = "L7"}
-			if (input == "L6") {
-				return {
-					Level : "5",
-					Costentext : `${Rebirth.Anzahl}/100 Rebirth`,
-					Costen : Rebirth.Anzahl,
-					Costen1 : 100,
-					Belonung : "Rang 3",
-					Don : (Rebirth.Anzahl >= 100)}
-			}
-			if (Level.L7) {input = "L8"}
-			if (input == "L7") {
-				return {
-					Level : "6",
-					Costentext : `${Rebirth.Anzahl}/150 Rebirth`,
-					Costen : Rebirth.Anzahl,
-					Costen1 : 150,
-					Belonung : "Rang 4",
-					Don : (Rebirth.Anzahl >= 150)}
-			}
-			if (Level.L8) {input = "L9"}
-			if (input == "L8") {
-				return {
-					Level : "7",
-					Costentext : `${Rebirth.Anzahl}/200 Rebirth`,
-					Costen : Rebirth.Anzahl,
-					Costen1 : 200,
-					Belonung : "Rang 5",
-					Don : (Rebirth.Anzahl >= 200)}
-			}
+	function Level_() {
+		input = "L1";
+		if (Level.L1) {input = "L2"}
+		if (input == "L1") {
 			return {
-				Costentext : "Das Ende",
-				Costen : 0,
-				Costen1 : 1,
-				Belonung : "",
-				Don : false,
-				Level : ""}
+				Level : "0",
+				Costentext : `${Rebirth.Anzahl}/5 Rebirth`,
+				Costen : Rebirth.Anzahl,
+				Costen1 : 5,
+				Belonung : "Multi Alles Kaufen, Automatisch Rebirth",
+				Don : (Rebirth.Anzahl >= 5)}
 		}
-		function zahl(input) {
-			input = Math.round(input)
-			if (input < Math.pow(10, 21)) {
-				var Var1 = "";
-					var ii = 0;
-					for (var i = String(input).length - 1; i >= 0; i--) {
-						if (ii >= 3) {
-							Var1 = String(input)[i] + "." + Var1;
-							ii = 0;
-						} else {
-							Var1 = String(input)[i] + Var1;
-						}
-						ii++;
+		if (Level.L2) {input = "L3"}
+		if (input == "L2") {
+			return {
+				Level : "1",
+				Costentext : `${Rebirth.Anzahl}/15 Rebirth`,
+				Costen : Rebirth.Anzahl,
+				Costen1 : 15,
+				Belonung : "Auto Multi Kaufen, Laden",
+				Don : (Rebirth.Anzahl >= 15)}
+		}
+		if (Level.L3) {input = "L4"}
+		if (input == "L3") {
+			return {
+				Level : "2",
+				Costentext : `${Rebirth.Anzahl}/25 Rebirth`,
+				Costen : Rebirth.Anzahl,
+				Costen1 : 25,
+				Belonung : "Super Rebirth",
+				Don : (Rebirth.Anzahl >= 25)}
+		}
+		if (Level.L4) {input = "L5"}
+		if (input == "L4") {
+			return {
+				Level : "3",
+				Costentext : `${Rebirth.Anzahl}/50 Rebirth`,
+				Costen : Rebirth.Anzahl,
+				Costen1 : 50,
+				Belonung : "Rang 1",
+				Don : (Rebirth.Anzahl >= 50)}
+		}
+		if (Level.L5) {input = "L6"}
+		if (input == "L5") {
+			return {
+				Level : "4",
+				Costentext : `${Rebirth.Anzahl}/75 Rebirth`,
+				Costen : Rebirth.Anzahl,
+				Costen1 : 75,
+				Belonung : "Rang 2",
+				Don : (Rebirth.Anzahl >= 75)}
+		}
+		if (Level.L6) {input = "L7"}
+		if (input == "L6") {
+			return {
+				Level : "5",
+				Costentext : `${Rebirth.Anzahl}/100 Rebirth`,
+				Costen : Rebirth.Anzahl,
+				Costen1 : 100,
+				Belonung : "Rang 3",
+				Don : (Rebirth.Anzahl >= 100)}
+		}
+		if (Level.L7) {input = "L8"}
+		if (input == "L7") {
+			return {
+				Level : "6",
+				Costentext : `${Rebirth.Anzahl}/150 Rebirth`,
+				Costen : Rebirth.Anzahl,
+				Costen1 : 150,
+				Belonung : "Rang 4",
+				Don : (Rebirth.Anzahl >= 150)}
+		}
+		if (Level.L8) {input = "L9"}
+		if (input == "L8") {
+			return {
+				Level : "7",
+				Costentext : `${Rebirth.Anzahl}/200 Rebirth`,
+				Costen : Rebirth.Anzahl,
+				Costen1 : 200,
+				Belonung : "Rang 5",
+				Don : (Rebirth.Anzahl >= 200)}
+		}
+		return {
+			Costentext : "Das Ende",
+			Costen : 0,
+			Costen1 : 1,
+			Belonung : "",
+			Don : false,
+			Level : ""}
+	}
+	function zahl(input) {
+		input = Math.round(input)
+		if (input < Math.pow(10, 21)) {
+			var Var1 = "";
+				var ii = 0;
+				for (var i = String(input).length - 1; i >= 0; i--) {
+					if (ii >= 3) {
+						Var1 = String(input)[i] + "." + Var1;
+						ii = 0;
+					} else {
+						Var1 = String(input)[i] + Var1;
 					}
-					return Var1
-			} else {return input}
+					ii++;
+				}
+				return Var1
+		} else {return input}
+	}
+
+
+	function update() {
+		// document.getElementById
+
+		for (let i = 1; i <= 6; i++) {
+			if (Auswahl == i) {
+				document.getElementById(`Tab_I${i}`).style.bottom = "2px"
+			} else {
+				document.getElementById(`Tab_I${i}`).style.bottom = "0px"
+			}
 		}
-		function update() {
-			if (Rebirth.Auto) {Rebirth_Buy(false)}
-			if (Multi.Auto) {Multi_Max(false)}
-			document.getElementById("Coin").textContent = `Coin: ${zahl(Coin)}`;
-			document.getElementById("Power").textContent = `Power: ${zahl(Multi.Anzahl * Math.pow(2, Rebirth.Anzahl))}`
+	}
 
 
-			Status.Multi_max = Math.max(Status.Multi_max, Multi.Anzahl)
-			Status.Rebirth_max = Math.max(Status.Rebirth_max, Rebirth.Anzahl)
+	function Click() {
+		let Crit_Multi = 1
+		while (Math.round(Math.random() * 100) < Crit - ((Crit_Multi - 1) * 10)) {Crit_Multi += 1}
+		Coin += (Multi.Anzahl * Math.pow(2, Rebirth.Anzahl)) * Math.pow(2, Crit_Multi - 1);
+		Status.Coin += (Multi.Anzahl * Math.pow(2, Rebirth.Anzahl)) * Math.pow(2, Crit_Multi - 1);
+		Status.Click += 1;
+		if (Crit_Multi > 1) {
+			document.getElementById("Click").textContent = `Click (Combo: ${Math.pow(2, Crit_Multi - 1)}x)`;
+			Status.Combo_max = Math.max(Status.Combo_max, Math.pow(2, Crit_Multi - 1))
+			Status.Combo += 1
+		} else {
+			document.getElementById("Click").textContent = `Click`;
+		}
+
+		update()
+	}
 
 
+	function Save() {
+		localStorage.setItem("Game", JSON.stringify({Data : Game, Version : 6}))
+	}
+	function Load() {
+		let Da = JSON.parse(localStorage.getItem("Game"))
+		if (Da.Version == 6) {
+			Game = Da.Data
+			document.getElementById('Achtung').style.display = 'none'
+		}
+	}
+	function Save_als() {
+		const url = URL.createObjectURL(new Blob([JSON.stringify({Data : Game, Version : 6})]))
 
+		const a = document.createElement("a");
+        a.href = url;
+        a.download = `Clicky v6.max-game`;
+        a.click();
 
-			document.getElementById("Multi").textContent = `Multi (${Multi.Anzahl})`;
-			if (Multi.Offen) {
-				document.getElementById("Multi").style.color = "black";
-				document.getElementById("Multi Anzeige").style.display = "block";
-				document.getElementById("Multi Costen").style.display = "block";
-				document.getElementById("Multi Anzahl").style.display = "block";
-				document.getElementById("Multi Kauf").style.display = "block";
-				if (Level.L1) {document.getElementById("Multi Kauf").textContent = "Max Kaufen";}
-				if (Level.L2) {document.getElementById("Multi Auto").style.display = "block";}
-				if (Multi.Auto) {
-					document.getElementById("Multi Auto").style.backgroundColor = "forestgreen";
-				} else {
-					document.getElementById("Multi Auto").style.backgroundColor = "lightgray";
-				}
-				document.getElementById("Multi Costen").textContent = `Costen: ${zahl(Multi.Costen / ((Multi.Rabat / 100) + 1))}`;
-				document.getElementById("Multi Anzahl").textContent = `Anzahl: ${zahl(Multi.Anzahl)}`;
-				if (Multi.Costen <= Coin) {
-					document.getElementById("Multi Kauf").style.backgroundColor = "forestgreen";
-				} else {
-					document.getElementById("Multi Kauf").style.backgroundColor = "lightgray";
-				}
-			} else {
-				if (Multi.Costen <= Coin) {
-					document.getElementById("Multi").style.color = "forestgreen";
-				} else {
-					document.getElementById("Multi").style.color = "black";
-				}
-				document.getElementById("Multi Anzeige").style.display = "none";
-				document.getElementById("Multi Costen").style.display = "none";
-				document.getElementById("Multi Anzahl").style.display = "none";
-				document.getElementById("Multi Kauf").style.display = "none";
-				document.getElementById("Multi Auto").style.display = "none";
-			};
-
-
-
-
-
-			document.getElementById("Rebirth").textContent = `Rebirth (${Rebirth.Anzahl})`;
-			if (Rebirth.Offen) {
-				document.getElementById("Rebirth").style.color = "black";
-				document.getElementById("Rebirth Anzeige").style.display = "block";
-				document.getElementById("Rebirth Costen").style.display = "block";
-				document.getElementById("Rebirth Anzahl").style.display = "block";
-				document.getElementById("Rebirth Kauf").style.display = "block";
-				if (Level.L1) {document.getElementById("Rebirth Auto").style.display = "block";}
-				if (Rebirth.Auto) {
-					document.getElementById("Rebirth Auto").style.backgroundColor = "forestgreen";
-				} else {
-					document.getElementById("Rebirth Auto").style.backgroundColor = "lightgray";
-				}
-				document.getElementById("Rebirth Costen").textContent = `Costen: ${zahl(Rebirth.Costen / ((Rebirth.Rabat / 100) + 1))}`;
-				document.getElementById("Rebirth Anzahl").textContent = `Anzahl: ${zahl(Rebirth.Anzahl)}`;
-				if (Rebirth.Costen <= Coin) {
-					document.getElementById("Rebirth Kauf").style.backgroundColor = "forestgreen";
-				} else {
-					document.getElementById("Rebirth Kauf").style.backgroundColor = "lightgray";
-				}
-			} else {
-				if (Rebirth.Costen <= Coin) {
-					document.getElementById("Rebirth").style.color = "forestgreen";
-				} else {
-					document.getElementById("Rebirth").style.color = "black";
-				}
-				document.getElementById("Rebirth Anzeige").style.display = "none";
-				document.getElementById("Rebirth Costen").style.display = "none";
-				document.getElementById("Rebirth Anzahl").style.display = "none";
-				document.getElementById("Rebirth Kauf").style.display = "none";
-				document.getElementById("Rebirth Auto").style.display = "none";
-			}
-
-
-
-
-			if (Level.L3) {document.getElementById("Super Rebirth").style.display = "block";}
-			if (S_Rebirth.Offen) {
-				document.getElementById("S Rebirth").style.color = "black";
-				document.getElementById("S Rebirth Anzeige").style.display = "block";
-				document.getElementById("S Rebirth Costen").style.display = "block";
-				document.getElementById("S Rebirth Costen 2").style.display = "block";
-				document.getElementById("S Rebirth Anzahl").style.display = "block";
-				document.getElementById("S Rebirth Kauf").style.display = "block";
-				document.getElementById("S Rebirth Kauf 2").style.display = "block";
-				document.getElementById("S Rebirth Anzahl").textContent = `Anzahl: ${zahl(S_Rebirth.Anzahl)}`;
-				if (20 <= Rebirth.Anzahl) {
-					document.getElementById("S Rebirth Kauf").style.backgroundColor = "forestgreen";
-				} else {
-					document.getElementById("S Rebirth Kauf").style.backgroundColor = "lightgray";
-				}
-				if (50 <= Rebirth.Anzahl) {
-					document.getElementById("S Rebirth Kauf 2").style.backgroundColor = "forestgreen";
-				} else {
-					document.getElementById("S Rebirth Kauf 2").style.backgroundColor = "lightgray";
-				}
-			} else {
-				if (S_Rebirth.Costen <= Rebirth.Anzahl) {
-					document.getElementById("S Rebirth").style.color = "forestgreen";
-				} else {
-					document.getElementById("S Rebirth").style.color = "black";
-				}
-				document.getElementById("S Rebirth Anzeige").style.display = "none";
-				document.getElementById("S Rebirth Costen").style.display = "none";
-				document.getElementById("S Rebirth Costen 2").style.display = "none";
-				document.getElementById("S Rebirth Anzahl").style.display = "none";
-				document.getElementById("S Rebirth Kauf").style.display = "none";
-				document.getElementById("S Rebirth Kauf 2").style.display = "none";
-			}
-
-
-
-
-			if (Level_().Don) {
-				document.getElementById("Level").style.color = "forestgreen";
-			} else {
-				document.getElementById("Level").style.color = "black";
-			}
-			document.getElementById("Level").textContent = `Level ${Level_().Level}`;
-			document.getElementById("Level Bar").value = Level_().Costen;
-			document.getElementById("Level Bar").max = Level_().Costen1;
-			document.getElementById("Level").style.color = "black";
-			document.getElementById("Level Anzeige").style.display = "block";
-			document.getElementById("Level Forderungen").style.display = "block";
-			document.getElementById("Level Belonung").style.display = "block";
-			document.getElementById("Level Forderungen").textContent = `Foderungen: ${Level_().Costentext}`;
-			document.getElementById("Level Belonung").textContent = `Belonung: ${Level_().Belonung}`;
-			document.getElementById("Level Button").style.display = "block";
-			if (Level_().Don) {
-				document.getElementById("Level Button").style.backgroundColor = "forestgreen";
-			} else {
-				document.getElementById("Level Button").style.backgroundColor = "lightgray";
-			}
-
+		URL.revokeObjectURL(url);
+	}
+	function Load_als() {
+		const input = document.createElement("input");
+		input.type = "file";
+		input.accept = ".max-game";
+		
+		input.addEventListener("change", (event) => {
+			const file = event.target.files[0];
 			
-
-			if (Eistelungen) {
-				document.getElementById("sammlung").style.display = "flex";
-			} else {
-				document.getElementById("sammlung").style.display = "none";
-			}
-
-			if (Level.L2) {
-				document.getElementById("Shop in").style.display = "block";
-				document.getElementById("Shop out").style.display = "none";
-			} else {
-				document.getElementById("Shop in").style.display = "none";
-				document.getElementById("Shop out").style.display = "flex";
-			}
-			document.getElementById("s2").textContent = `${zahl(100 / ((Multi.Rabat / 100) + 1))} %`;
-			document.getElementById("s3").textContent = `${zahl(100 / ((Rebirth.Rabat / 100) + 1))} %`;
-			document.getElementById("s4").textContent = `${Crit} %`;
-
-			document.getElementById("I1").textContent = `Coin ingesamt:${zahl(Status.Coin)}` ;
-			document.getElementById("I2").textContent = `Click ingesamt:${zahl(Status.Click)}` ;
-			document.getElementById("I3").textContent = `Multi ingesamt: ${zahl(Status.Multi)}` ;
-			document.getElementById("I4").textContent = `Multi höstes: ${zahl(Status.Multi_max)}` ;
-			document.getElementById("I5").textContent = `Rebirth ingesamt: ${zahl(Status.Rebirth)}` ;
-			document.getElementById("I6").textContent = `Rebirth höstes: ${zahl(Status.Rebirth_max)}` ;
-			document.getElementById("I7").textContent = `Ultra Rebirth ingesamt: ${zahl(Status.S_Rebirth)}` ;
-			document.getElementById("I8").textContent = `Combo ingesamt: ${zahl(Status.Combo)}` ;
-			document.getElementById("I9").textContent = `Combo höstes: ${zahl(Status.Combo_max)}x` ;
-		};
-
-		let startclick = 0;
-		let endclick = 0;
-		let cheatclick = false;
-		function Click() {
-			startclick = (Date.now() - endclick)
-			if (!cheatclick && startclick < 25) {
-				cheatclick = true
-			}
-			if (cheatclick && startclick < 250) {
-				console.log("Auto Clicker")
-				return
-			} else {
-				endclick = Date.now()
-				cheatclick = false
-			}
-			let Crit_Multi = 1
-			while (Math.round(Math.random() * 100) < Crit - ((Crit_Multi - 1) * 10)) {Crit_Multi += 1}
-			Coin += (Multi.Anzahl * Math.pow(2, Rebirth.Anzahl)) * Math.pow(2, Crit_Multi - 1);
-			Status.Coin += (Multi.Anzahl * Math.pow(2, Rebirth.Anzahl)) * Math.pow(2, Crit_Multi - 1);
-			Status.Click += 1;
-			if (Crit_Multi > 1) {
-				document.getElementById("Click").textContent = `Click (Combo: ${Math.pow(2, Crit_Multi - 1)}x)`;
-				Status.Combo_max = Math.max(Status.Combo_max, Math.pow(2, Crit_Multi - 1))
-				Status.Combo += 1
-			} else {
-				document.getElementById("Click").textContent = `Click`;
-			}
-			update()
-		}
-
-		function Multi_Buy() {
-			let Rabat = (Multi.Costen / ((Multi.Rabat / 100) + 1))
-			if (Rabat <= Coin) {
-				Coin -= Rabat;
-				Multi.Anzahl += 1;
-				Multi.Costen *= 2;
-
-				Status.Multi += 1;
-			}
-			update()
-		}
-		function Multi_Max(inn = true) {
-			let Rabat = (Multi.Costen / ((Multi.Rabat / 100) + 1))
-			while (Rabat <= Coin) {
-				Rabat = (Multi.Costen / ((Multi.Rabat / 100) + 1))
-				Coin -= Rabat;
-				Multi.Anzahl += 1;
-				Multi.Costen *= 2;
-
-				Status.Multi += 1;
-			}
-			if (inn) {update()}
-		}
-		function Multi_Auto() {
-			Multi.Auto = !Multi.Auto;
-			update()
-		}
-		function Rebirth_Buy(inn = true) {
-			let Rabat = (Rebirth.Costen / ((Rebirth.Rabat / 100) + 1))
-			if (Rabat <= Coin) {
-				Coin = 0;
-				Multi.Anzahl = 1;
-				Multi.Costen = 10;
-				Rebirth.Anzahl += 1;
-				Rebirth.Costen *= 2;
-				if (Rebirth.Anzahl >= 50) {
-					Rebirth.Costen *= 1.1;
-				}
-
-				Status.Rebirth += 1;
-			}
-			if (inn) {update()}
-		}
-		function Rebirth_Auto() {
-			Rebirth.Auto = !Rebirth.Auto;
-			update()
-		}
-		function zurück() {
-			Coin = 0;
-			Multi.Anzahl = 1;
-			Multi.Costen = 10;
-			Rebirth.Anzahl = 0;
-			Rebirth.Costen = 160;
-			update();
-		}
-		function S_Rebirth_Buy() {
-			if (20 <= Rebirth.Anzahl) {
-				S_Rebirth.Anzahl += 1;
-				Status.S_Rebirth += 1
-				zurück()
-			}
-			update()
-		}
-		function S_Rebirth_Buy_2() {
-			if (50 <= Rebirth.Anzahl) {
-				S_Rebirth.Anzahl += 2;
-				Status.S_Rebirth += 2
-				zurück()
-			}
-			update()
-		}
-		function Sammeln() {
-			if (Level_().Don) {
-				if (!Level.L1) {Level.L1 = true; update(); return}
-				if (!Level.L2) {Level.L2 = true; update(); return}
-				if (!Level.L3) {Level.L3 = true; update(); return}
-				if (!Level.L4) {Level.L4 = true; update(); return}
-				if (!Level.L5) {Level.L5 = true; update(); return}
-				if (!Level.L6) {Level.L6 = true; update(); return}
-				if (!Level.L7) {Level.L7 = true; update(); return}
-				if (!Level.L8) {Level.L8 = true; update(); return}
-			}
-		}
-
-		function Switch_Multi() {
-			Multi.Offen = true;
-			Rebirth.Offen = false;
-			S_Rebirth.Offen = false;
-			update()
-		}
-		function Switch_Rebirth() {
-			Multi.Offen = false;
-			Rebirth.Offen = true;
-			S_Rebirth.Offen = false;
-			update()
-		}
-		function Switch_S_Rebirth() {
-			Multi.Offen = false;
-			Rebirth.Offen = false;
-			S_Rebirth.Offen = true;
-			update()
-		}
-		function Switch_Keymenü() {
-			Keymenü = !(Keymenü);
-			update()
-		}
-		function Switch_Einstelung() {
-			Eistelungen = !(Eistelungen);
-			update()
-		}
-
-		let Version = "5.0"
-		function Speichern() {
-			localStorage.setItem(`V${Version} Save`, true);
-			localStorage.setItem(`V${Version} Coin`, Coin);
-
-			localStorage.setItem(`V${Version} L1`, Level.L1);
-			localStorage.setItem(`V${Version} L2`, Level.L2);
-			localStorage.setItem(`V${Version} L3`, Level.L3);
-			localStorage.setItem(`V${Version} L4`, Level.L4);
-			localStorage.setItem(`V${Version} L5`, Level.L5);
-			localStorage.setItem(`V${Version} L6`, Level.L6);
-			localStorage.setItem(`V${Version} L7`, Level.L7);
-			localStorage.setItem(`V${Version} L8`, Level.L8);
-
-			localStorage.setItem(`V${Version} Multi Costen`, Multi.Costen);
-			localStorage.setItem(`V${Version} Multi Anzahl`, Multi.Anzahl);
-			localStorage.setItem(`V${Version} Multi Auto`, Multi.Auto);
-			localStorage.setItem(`V${Version} Multi Rabat`, Multi.Rabat);
-
-			localStorage.setItem(`V${Version} Rebirth Costen`, Rebirth.Costen);
-			localStorage.setItem(`V${Version} Rebirth Anzahl`, Rebirth.Anzahl);
-			localStorage.setItem(`V${Version} Rebirth Auto`, Rebirth.Auto);
-			localStorage.setItem(`V${Version} Rebirth Rabat`, Rebirth.Rabat);
-
-			localStorage.setItem(`V${Version} S Rebirth Costen`, S_Rebirth.Costen);
-			localStorage.setItem(`V${Version} S Rebirth Anzahl`, S_Rebirth.Anzahl);
-
-			localStorage.setItem(`V${Version} Crit`, Crit);
-			document.getElementById("Loaden").textContent = "Laden";
-		}
-		function Laden() {
-			if (localStorage.getItem(`V${Version} Save`) == "true") {
-				Coin = Number(localStorage.getItem(`V${Version} Coin`));
-
-				Level = {
-					L1 : (localStorage.getItem(`V${Version} L1`) == "true"),
-					L2 : (localStorage.getItem(`V${Version} L2`) == "true"),
-					L3 : (localStorage.getItem(`V${Version} L3`) == "true"),
-					L4 : (localStorage.getItem(`V${Version} L4`) == "true"),
-					L5 : (localStorage.getItem(`V${Version} L5`) == "true"),
-					L6 : (localStorage.getItem(`V${Version} L6`) == "true"),
-					L7 : (localStorage.getItem(`V${Version} L7`) == "true"),
-					L8 : (localStorage.getItem(`V${Version} L8`) == "true"),
-				}
-
-				Multi = {
-					Offen  : Multi.Offen,
-					Costen : Number(localStorage.getItem(`V${Version} Multi Costen`)),
-					Rabat  : Number(localStorage.getItem(`V${Version} Multi Rabat`)),
-					Anzahl : Number(localStorage.getItem(`V${Version} Multi Anzahl`)),
-					Auto   : (localStorage.getItem(`V${Version} Multi Auto`) == "true"),
-				}
-
-				Rebirth = {
-					Offen  : Rebirth.Offen,
-					Costen : Number(localStorage.getItem(`V${Version} Rebirth Costen`)),
-					Rabat  : Number(localStorage.getItem(`V${Version} Rebirth Rabat`)),
-					Anzahl : Number(localStorage.getItem(`V${Version} Rebirth Anzahl`)),
-					Auto   : (localStorage.getItem(`V${Version} Rebirth Auto`) == "true"),
-				}
-
-				S_Rebirth = {
-					Offen  : Rebirth.Offen,
-					Costen : Number(localStorage.getItem(`V${Version} S Rebirth Costen`)),
-					Anzahl : Number(localStorage.getItem(`V${Version} S Rebirth Anzahl`)),
-				}
-
-				Status = {
-					Coin        : Number(localStorage.getItem(`V${Version} Status Coin`)),
-					Click       : Number(localStorage.getItem(`V${Version} Status Click`)),
-					Multi       : Number(localStorage.getItem(`V${Version} Status Multi`)),
-					Multi_max   : Number(localStorage.getItem(`V${Version} Status Multi Max`)),
-					Rebirth     : Number(localStorage.getItem(`V${Version} Status Rebirth`)),
-					Rebirth_max : Number(localStorage.getItem(`V${Version} Status Rebirth Max`)),
-					S_Rebirth   : Number(localStorage.getItem(`V${Version} Status S_Rebirth`)),
-					Combo       : Number(localStorage.getItem(`V${Version} Status Combo`)),
-					Combo_max   : Number(localStorage.getItem(`V${Version} Status Combo Max`)),
-				}
-
-				Crit = Number(localStorage.getItem(`V${Version} Crit`))
-			} else {
-				document.getElementById("Loaden").textContent = "Noch nicht gespeichert";
-			}
-			update()
-		}
-		function Speichern_Als() {
-			let josn = {
-				Coin : Coin,
-
-				Status : Status,
-				Level : Level,
-
-				Multi : Multi,
-				Rebirth : Rebirth,
-				S_Rebirth : S_Rebirth,
-
-				Crit : Crit,
-			}
-			const url = URL.createObjectURL(new Blob([JSON.stringify(josn)]))
-
-			const a = document.createElement("a");
-        	a.href = url;
-        	a.download = `Clicky v${Version}.max-game`;
-        	a.click();
-
-			URL.revokeObjectURL(url);
-		}
-		function Laden_Als() {
-			const input = document.createElement("input");
-			input.type = "file";
-			input.accept = ".max-game";
-
-			input.addEventListener("change", (event) => {
-				const file = event.target.files[0];
-
-				const reader = new FileReader();
-				reader.onload = () => {
-					const jsonData = JSON.parse(reader.result);
-					Coin = jsonData.Coin
-
-					Status = jsonData.Status
-					Level = jsonData.Level
-					Multi = jsonData.Multi
-					Rebirth = jsonData.Rebirth
-					S_Rebirth = jsonData.S_Rebirth
-
-					Crit = jsonData.Crit;
+			const reader = new FileReader();
+			reader.onload = () => {
+					Game = JSON.parse(reader.result).Data
 					update()
 				}
 				reader.readAsText(file);
 			})
 			input.click();
-		}
-		let startTime;
-		function Z_Click() {startTime = Date.now();}
-		function Zurücksetzen() {
-			let endTime = Date.now();
-    		let clickDuration = endTime - startTime;
-			
-    		if (clickDuration >= 5000) {
-				Speichern()
-				localStorage.setItem(`V${Version} L1`, true);
-				localStorage.setItem(`V${Version} L2`, true);
-				localStorage.setItem(`V${Version} L3`, true);
-				localStorage.setItem(`V${Version} L4`, true);
-				localStorage.setItem(`V${Version} L5`, true);
-    		} else {
-				localStorage.removeItem(`V${Version} Save`)
+	}
+	function Not_Save() {
+		if (confirm("Wilst du speichern")) {
+			Save_als()
+		} else {
+			if (confirm("Wirklich nicht Speichern")) {
+				Save_als()
 			}
-			onbeforeunload = null;
-			location.reload()
 		}
-		onbeforeunload = Speichern;
-		Laden()
+	}
+	onbeforeunload = Not_Save;
+	Load()
 
-		addEventListener("keypress", function(event) {
-			if (Multi.Offen) {
-				if (Level.L1) {
-					if (event.key == "1") { Multi_Max() }
-				} else {
-					if (event.key == "1") { Multi_Buy() }
-				}
-			} else {
-				if (event.key == "1") { Switch_Multi() }
-			}
-			if (Rebirth.Offen) {
-				if (event.key == "2") { Rebirthi_Buy() }
-			} else {
-				if (event.key == "2") { Switch_Rebirth() }
-			}
-			if (S_Rebirth.Offen) {
-				if (event.key == "3") { S_Rebirth_Buy() }
-			} else {
-				if (event.key == "3") { Switch_S_Rebirth() }
-			}
-			if (event.key == "4") { Sammeln() }
-		})
+	window.addEventListener("resize", function() {
+		document.body.style.zoom = Math.min(1, window.innerWidth / (1920 / 2));
+	});
 
-		function getViewportSize() {
-			let width = window.innerWidth;
-			let height = window.innerHeight;
-		
-			return { width, height };
-		}
-		function zoomToViewport(viewportSize) {
-			let zoomFactor = Math.min(1, viewportSize.width / (1920 / 2));
-			document.body.style.zoom = zoomFactor;
-		}
-		window.addEventListener("resize", function() {
-			let viewportSize = getViewportSize();
-			zoomToViewport(viewportSize);
-		 });
-		let viewportSize = getViewportSize();
-		zoomToViewport(viewportSize);
-
-
-		setInterval(Speichern, 1000)
-		Switch_Multi()
-		update()
-	</script>
-</html>
+	update()
+</script>
