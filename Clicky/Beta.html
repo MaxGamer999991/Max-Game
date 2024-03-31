@@ -2,7 +2,7 @@
 <html style="font-family: sans-serif; touch-action: manipulation; zoom: 1.5; overflow-y: scroll;">
 	<head>
 		<title>Clicky v6.0</title>
-		<link rel="icon" href="https://lh3.google.com/u/0/d/1Z3uYexZ2Xtkv4exeuNPiIAOQrXvp9lVW=w960-h518-iv1">
+		<link rel="icon" href="https://raw.githubusercontent.com/MaxGamer999991/Max-Game/main/Clicky/Original.png">
 	</head>
 	<style>
 		.Fenster {
@@ -34,14 +34,14 @@
 		</div>
 		<h1 style="text-align: center;">Clicky</h1>
 
-		<div>
+		<div id="M_Einstelung">
 			<div>
-				<button>Speichern Cloud</button>
-				<button>Laden Cloud</button>
+				<button onclick="Save()">Speichern Cloud</button>
+				<button onclick="Load()">Laden Cloud</button>
 			</div>
 			<div>
-				<button>Speichern Datai</button>
-				<button>Laden Datai</button>
+				<button onclick="Save_als()">Speichern Datai</button>
+				<button onclick="Load_als()">Laden Datai</button>
 			</div>
 		</div>
 
@@ -230,6 +230,11 @@
 				document.getElementById(`Tab_I${i}`).style.bottom = "0px"
 			}
 		}
+		if (Auswahl == 6) {
+			document.getElementById("M_Einstelung").style.display = "block"
+		} else {
+			document.getElementById("M_Einstelung").style.display = "none"
+		}
 	}
 
 
@@ -258,7 +263,6 @@
 		let Da = JSON.parse(localStorage.getItem("Game"))
 		if (Da.Version == 6) {
 			Game = Da.Data
-			document.getElementById('Achtung').style.display = 'none'
 		}
 	}
 	function Save_als() {
