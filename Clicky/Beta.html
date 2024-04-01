@@ -32,7 +32,21 @@
 		<div>
 
 		</div>
-		<h1 style="text-align: center;">Clicky</h1>
+		<h1 style="text-align: center; margin-bottom: 5px;">Clicky</h1>
+
+		<div style="text-align: center; margin-bottom: 20px;">
+			<h3 style="margin: 0;">Coin: 0</h3>
+			<p style="margin: 0;">Power: 0</p>
+		</div>
+
+
+		<div id="M_Home">
+			<button style="position: relative; inset: 0;" onclick="Click()">Click</button>
+		</div>
+
+		<div id="M_Upgrade">
+
+		</div>
 
 		<div id="M_Einstelung">
 			<div>
@@ -72,7 +86,6 @@
 	var Game = {
 		Coin : 0,
 
-		Eistelungen : false,
 		Status : {
 			Coin : 0,
 			Click : 0,
@@ -92,7 +105,7 @@
 			Rabat : 0,
 			Auto : false
 		},
-		Rebirt : {
+		Rebirth : {
 			Offen : false,
 			Anzahl : 0,
 			Costen : 160,
@@ -230,6 +243,16 @@
 				document.getElementById(`Tab_I${i}`).style.bottom = "0px"
 			}
 		}
+		if (Auswahl == 1) {
+			document.getElementById("M_Home").style.display = "block"
+		} else {
+			document.getElementById("M_Home").style.display = "none"
+		}
+		if (Auswahl == 2) {
+			document.getElementById("M_Upgrade").style.display = "block"
+		} else {
+			document.getElementById("M_Upgrade").style.display = "none"
+		}
 		if (Auswahl == 6) {
 			document.getElementById("M_Einstelung").style.display = "block"
 		} else {
@@ -240,17 +263,10 @@
 
 	function Click() {
 		let Crit_Multi = 1
-		while (Math.round(Math.random() * 100) < Crit - ((Crit_Multi - 1) * 10)) {Crit_Multi += 1}
-		Coin += (Multi.Anzahl * Math.pow(2, Rebirth.Anzahl)) * Math.pow(2, Crit_Multi - 1);
-		Status.Coin += (Multi.Anzahl * Math.pow(2, Rebirth.Anzahl)) * Math.pow(2, Crit_Multi - 1);
-		Status.Click += 1;
-		if (Crit_Multi > 1) {
-			document.getElementById("Click").textContent = `Click (Combo: ${Math.pow(2, Crit_Multi - 1)}x)`;
-			Status.Combo_max = Math.max(Status.Combo_max, Math.pow(2, Crit_Multi - 1))
-			Status.Combo += 1
-		} else {
-			document.getElementById("Click").textContent = `Click`;
-		}
+		while (Math.round(Math.random() * 100) < Game.Crit - ((Crit_Multi - 1) * 10)) {Crit_Multi += 1}
+		Game.Coin += (Game.Multi.Anzahl * Math.pow(2, Game.Rebirth.Anzahl)) * Math.pow(2, Crit_Multi - 1);
+		Game.Status.Coin += (Game.Multi.Anzahl * Math.pow(2, Game.Rebirth.Anzahl)) * Math.pow(2, Crit_Multi - 1);
+		Game.Status.Click += 1;
 
 		update()
 	}
@@ -261,6 +277,7 @@
 	}
 	function Load() {
 		let Da = JSON.parse(localStorage.getItem("Game"))
+		if (Da == null) {return}
 		if (Da.Version == 6) {
 			Game = Da.Data
 		}
@@ -300,6 +317,11 @@
 				Save_als()
 			}
 		}
+	}
+	function Zurücksetzen() {
+		localStorage.clear()
+		onbeforeunload = null;
+		location.reload()
 	}
 	onbeforeunload = Not_Save;
 	Load()
