@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Consol</title>
+    </head>
+    <style>
+        body {
+            background-color: black;
+            font-family: sans-serif;
+        }
+        p {
+            color: limegreen;
+            margin-block: 5px;
+        }
+    </style>
+    <body>
+        <p>error</p>
+    </body>
+</html>
+<script>
+    function teilen(i) {
+        let List = []
+
+        let ii = ""
+        for (let iii = 0; i.length > iii; iii++) {
+            switch (i[iii]) {
+                case ";":
+                    if (ii != "") List.push(ii);
+                    List.push(";");
+                    ii = "";
+                    break
+                case " ":
+                    if (ii != "") List.push(ii);
+                    ii = "";
+                    break
+                default:
+                    ii += i[iii];
+                    break
+            }
+        }
+
+        return List
+    }
+    function run(List) {
+        var Var = []
+        for (let i = 0; List.length > i; i++) {
+            switch (List[i]) {
+                case "var":
+                    let ii = "";
+                    let iii = i;
+                    while (List[i+3] != ";") {
+                        ii += List[i+3]
+                        ii += " "
+                        i += 1
+                    }
+                    Var.push([List[iii+1], ii])
+                    i += 3;
+                    break
+                case "message":
+                    console.log(List[i+1])
+                    i += 2
+                    break
+                default:
+                    console.error("error")
+                    break
+            }
+        }
+        return Var
+    }
+</script>

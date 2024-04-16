@@ -2,9 +2,22 @@
 <html style="font-family: sans-serif; touch-action: manipulation; zoom: 1.5; overflow-y: scroll;">
 	<head>
 		<title>Clicky v6.0</title>
-		<link rel="icon" href="https://raw.githubusercontent.com/MaxGamer999991/Max-Game/main/Clicky/Original.png">
+		<link rel="icon" href="https://raw.githubusercontent.com/MaxGamer999991/Max-Game/main/Clicky/Icon.png">
 	</head>
 	<style>
+		#Zurück {
+			position: absolute;
+			top: -10px;
+			left: -10px;
+			height: 35px;
+			width: 35px;
+			background-color: lightgray;
+			border-radius: 10px;
+			border-color: dimgray;
+			border-style: solid;
+			display: block;
+		}
+
 		.Fenster {
 			margin: 10px;
 			padding: 5px;
@@ -14,7 +27,6 @@
 		.Head {
 			margin-block: 0px;
 			padding: 10px;
-			cursor: pointer;
 			border-radius: 10px;
 			background: darkgray;
 		}
@@ -27,36 +39,81 @@
 			border-radius: 10px;
 			cursor: pointer;
 		}
+
+		#Willkommen {
+			position: absolute;
+			inset: 20px;
+			border-color: dimgray;
+			border-width: 5px;
+			border-style: solid;
+		}
+		#Text {
+			position: absolute;
+			inset: 20px;
+			border-color: dimgray;
+			border-width: 5px;
+			border-style: solid;
+			display: none;
+		}
 	</style>
 	<body>
-		<div>
-
-		</div>
 		<h1 style="text-align: center; margin-bottom: 5px;">Clicky</h1>
-
+		
 		<div style="text-align: center; margin-bottom: 20px;">
-			<h3 style="margin: 0;">Coin: 0</h3>
-			<p style="margin: 0;">Power: 0</p>
+			<h3 style="margin: 0;" id="Coin">Coin: 0</h3>
+			<p  style="margin: 0;" id="Power">Power: 0</p>
 		</div>
 
 
 		<div id="M_Home">
-			<button style="position: relative; inset: 0;" onclick="Click()">Click</button>
+			<button style="
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 130px;
+				bottom: 50px;
+				border-style: none;
+				font-size: x-large;
+				font-weight: bold;" onclick="Click()">Click</button>
 		</div>
 
 		<div id="M_Upgrade">
-
+			<div class="Fenster">
+				<h3 class="Head">Multi</h3>
+				<div>
+					<div style="margin: 10px;">
+						<p style="margin: 0px;" id="Multi Costen">Kosten: 10</p>
+						<p style="margin: 0px;" id="Multi Anzahl">Anzahl: 1</p>
+					</div>
+					<button class="Button" id="Multi Kaufen" onclick="Multi_Buy()">Kaufen</button>
+					<button class="Button" id="Multi Max" onclick="Multi_Max()">Kaufen Alles</button>
+					<button class="Button" id="Multi Auto" onclick="Multi_Auto()">Kaufen Auto</button>
+				</div>
+			</div>
+			<div class="Fenster">
+				<h3 class="Head">Rebirth</h3>
+				<div>
+					<div style="margin: 10px;">
+						<p style="margin: 0px;" id="Rebirth Costen">Kosten: 10</p>
+						<p style="margin: 0px;" id="Rebirth Anzahl">Anzahl: 1</p>
+					</div>
+					<button class="Button" id="Rebirth Kaufen" onclick="Rebirth_Buy()">Kaufen</button>
+					<button class="Button" id="Rebirth Max" onclick="Rebirth_Max()">Kaufen Alles</button>
+					<button class="Button" id="Rebirth Auto" onclick="Rebirth_Auto()">Kaufen Auto</button>
+				</div>
+			</div>
 		</div>
 
 		<div id="M_Einstelung">
 			<div>
-				<button onclick="Save()">Speichern Cloud</button>
-				<button onclick="Load()">Laden Cloud</button>
+				<button class="Button" onclick="Save()">Speichern Cloud</button>
+				<button class="Button" onclick="Load()">Laden Cloud</button>
 			</div>
 			<div>
-				<button onclick="Save_als()">Speichern Datai</button>
-				<button onclick="Load_als()">Laden Datai</button>
+				<button class="Button" onclick="Save_als()">Speichern Datai</button>
+				<button class="Button" onclick="Load_als()">Laden Datai</button>
 			</div>
+			<button class="Button" style="background-color: red;" onclick="Zurücksetzen()">Zurücksetzen</button>
 		</div>
 
 		<div>
@@ -69,6 +126,7 @@
 				right: 0px;
 				bottom: 0px;
 				background: lightgray;
+				height: 32px;
 			">
 				<button style="position: relative; bottom: 0px;" id="Tab_I1" onclick="Auswahl = 1; update()" class="Button">Home</button>
 				<button style="position: relative; bottom: 0px;" id="Tab_I2" onclick="Auswahl = 2; update()" class="Button">Upgrade</button>
@@ -78,169 +136,177 @@
 				<button style="position: relative; bottom: 0px;" id="Tab_I6" onclick="Auswahl = 6; update()" class="Button">Einstelung</button>
 			</div>
 		</div>
+		<div id="Tutorial">
+			<div class="Fenster" id="Willkommen">
+				<h3 class="Head">Willkommen</h3>
+				<p>Bei Clicky ein Spiel von Max-Game</p>
+
+				<div style="position: absolute; left: 0px; bottom: 0px; right: 0px;">
+					<div style="display: flex; position: absolute; left: 0px; bottom: 30px; right: 0px;">
+						<button class="Button" style="width: -webkit-fill-available; background-color: limegreen;" onclick="
+							document.getElementById(`Willkommen`).style.display = `none`
+							document.getElementById(`Text`).style.display = `block`">Interaktion (empfohlen)</button>
+						<button class="Button" style="width: -webkit-fill-available;" onclick="
+							document.getElementById(`Willkommen`).style.display = `none`
+							document.getElementById(`Text`).style.display = `block`">Text (schneller)</button>
+					</div>
+					<button class="Button" style="position: absolute; left: 0px; bottom: 0px; right: 0px; background-color: red;" onclick="Turorial_done()">Schließen</button>
+				</div>
+			</div>
+			<div class="Fenster" id="Text">
+				<h3 class="Head">Text</h3>
+
+				<p>Clicky ist ein spiel wo man Clicken und Upgrads und ein Shop hat</p>
+				<p>Wenn man Clickt bekommt man Coin wie viel man bekommt bestimt die Power</p>
+				<p>Um mehr Power zu bekommen braucht man Upgrads aber um Upgrade zu bekommen brauch man Coin</p>
+				<p>Es gibt auch den Shop den man später freischaltet im Shop kann man dinge kaufen die z.B.: "Multi Rabat" das mach das Multi Weniger Kostet</p>
+
+				<button class="Button" style="position: absolute; left: 0px; bottom: 0px; right: 0px;" onclick="Turorial_done()">Schließen</button>
+			</div>
+		</div>
+		<button id="Zurück"><</button>
 	</body>
 </html>
 <script>
+	if (location.host != "maxgamer999991.github.io") {document.getElementById("Zurück").style.display = "none"}
 
 	var Auswahl = 1;
 	var Game = {
 		Coin : 0,
 
-		Status : {
-			Coin : 0,
-			Click : 0,
-			Multi : 0,
-			Multi_max : 0,
-			Rebirth : 0,
-			Rebirth_max : 0,
-			S_Coin : 0,
-			Combo : 0,
-			Combo_max : 0,
+
+		Shop : {
+			Multi_max : false,
+			Multi_auto : false,
+			Rebirth_max : false,
+			Rebirth_auto : false,
+			S_Coin : false,
+			S_Coin_max : false,
+			S_Coin_auto : false,
 		},
 
 		Multi : {
-			Offen : false,
 			Anzahl : 1,
 			Costen : 10,
 			Rabat : 0,
-			Auto : false
+			Auto : false,
 		},
 		Rebirth : {
-			Offen : false,
 			Anzahl : 0,
 			Costen : 160,
 			Rabat : 0,
-			Auto : false
+			Auto : false,
 		},
 
 		Level : 0,
 
 		S_Coin : {
-			Offen : false,
 			Anzahl : 0,
-			Auto : false
+			Auto : false,
 		},
 
 		Crit : 0,
+		Tutorial : false,
 	}
 
 	function Level_() {
-		input = "L1";
-		if (Level.L1) {input = "L2"}
-		if (input == "L1") {
-			return {
-				Level : "0",
-				Costentext : `${Rebirth.Anzahl}/5 Rebirth`,
-				Costen : Rebirth.Anzahl,
-				Costen1 : 5,
-				Belonung : "Multi Alles Kaufen, Automatisch Rebirth",
-				Don : (Rebirth.Anzahl >= 5)}
+		switch (Game.Level) {
+			case 4:
+				return {
+					Level : "4",
+					Costentext : `${Rebirth.Anzahl}/100 Rebirth`,
+					Costen : Rebirth.Anzahl,
+					Costen1 : 100,
+					Belonung : "Rebirth Auto Kaufen",
+					Don : (Rebirth.Anzahl >= 100)}
+			case 3:
+				return {
+					Level : "3",
+					Costentext : `${Rebirth.Anzahl}/50 Rebirth`,
+					Costen : Rebirth.Anzahl,
+					Costen1 : 50,
+					Belonung : "Multi Auto Kaufen, Rang, Rebirth Alles Kaufen",
+					Don : (Rebirth.Anzahl >= 50)}
+			case 2:
+				return {
+					Level : "2",
+					Costentext : `${Rebirth.Anzahl}/25 Rebirth`,
+					Costen : Rebirth.Anzahl,
+					Costen1 : 25,
+					Belonung : "Super Coin",
+					Don : (Rebirth.Anzahl >= 25)}
+			case 1:
+				return {
+					Level : "1",
+					Costentext : `${Rebirth.Anzahl}/15 Rebirth`,
+					Costen : Rebirth.Anzahl,
+					Costen1 : 15,
+					Belonung : "Laden",
+					Don : (Rebirth.Anzahl >= 15)}
+			case 0:
+				return {
+					Level : "0",
+					Costentext : `${Rebirth.Anzahl}/5 Rebirth`,
+					Costen : Rebirth.Anzahl,
+					Costen1 : 5,
+					Belonung : "Multi Alles Kaufen",
+					Don : (Rebirth.Anzahl >= 5)}
+			default:
+				return {
+					Costentext : "Das Ende",
+					Costen : 1,
+					Costen1 : 1,
+					Belonung : "",
+					Don : false,
+					Level : ""}
 		}
-		if (Level.L2) {input = "L3"}
-		if (input == "L2") {
-			return {
-				Level : "1",
-				Costentext : `${Rebirth.Anzahl}/15 Rebirth`,
-				Costen : Rebirth.Anzahl,
-				Costen1 : 15,
-				Belonung : "Auto Multi Kaufen, Laden",
-				Don : (Rebirth.Anzahl >= 15)}
-		}
-		if (Level.L3) {input = "L4"}
-		if (input == "L3") {
-			return {
-				Level : "2",
-				Costentext : `${Rebirth.Anzahl}/25 Rebirth`,
-				Costen : Rebirth.Anzahl,
-				Costen1 : 25,
-				Belonung : "Super Rebirth",
-				Don : (Rebirth.Anzahl >= 25)}
-		}
-		if (Level.L4) {input = "L5"}
-		if (input == "L4") {
-			return {
-				Level : "3",
-				Costentext : `${Rebirth.Anzahl}/50 Rebirth`,
-				Costen : Rebirth.Anzahl,
-				Costen1 : 50,
-				Belonung : "Rang 1",
-				Don : (Rebirth.Anzahl >= 50)}
-		}
-		if (Level.L5) {input = "L6"}
-		if (input == "L5") {
-			return {
-				Level : "4",
-				Costentext : `${Rebirth.Anzahl}/75 Rebirth`,
-				Costen : Rebirth.Anzahl,
-				Costen1 : 75,
-				Belonung : "Rang 2",
-				Don : (Rebirth.Anzahl >= 75)}
-		}
-		if (Level.L6) {input = "L7"}
-		if (input == "L6") {
-			return {
-				Level : "5",
-				Costentext : `${Rebirth.Anzahl}/100 Rebirth`,
-				Costen : Rebirth.Anzahl,
-				Costen1 : 100,
-				Belonung : "Rang 3",
-				Don : (Rebirth.Anzahl >= 100)}
-		}
-		if (Level.L7) {input = "L8"}
-		if (input == "L7") {
-			return {
-				Level : "6",
-				Costentext : `${Rebirth.Anzahl}/150 Rebirth`,
-				Costen : Rebirth.Anzahl,
-				Costen1 : 150,
-				Belonung : "Rang 4",
-				Don : (Rebirth.Anzahl >= 150)}
-		}
-		if (Level.L8) {input = "L9"}
-		if (input == "L8") {
-			return {
-				Level : "7",
-				Costentext : `${Rebirth.Anzahl}/200 Rebirth`,
-				Costen : Rebirth.Anzahl,
-				Costen1 : 200,
-				Belonung : "Rang 5",
-				Don : (Rebirth.Anzahl >= 200)}
-		}
-		return {
-			Costentext : "Das Ende",
-			Costen : 0,
-			Costen1 : 1,
-			Belonung : "",
-			Don : false,
-			Level : ""}
 	}
 	function zahl(input) {
-		input = Math.round(input)
-		if (input < Math.pow(10, 21)) {
+		if (input >= Math.pow(10, 6)) {
+			let i = input
+			let ii = 0
+			while (i >= 10000) {
+				i /= 10
+				ii += 1
+			}
+			return `${(Math.round(i)) / 1000} e+${ii}`
+		} else {
 			var Var1 = "";
-				var ii = 0;
-				for (var i = String(input).length - 1; i >= 0; i--) {
-					if (ii >= 3) {
-						Var1 = String(input)[i] + "." + Var1;
-						ii = 0;
-					} else {
-						Var1 = String(input)[i] + Var1;
-					}
-					ii++;
+			var ii = 0;
+			for (var i = String(Math.round(input)).length - 1; i >= 0; i--) {
+				if (ii >= 3) {
+					Var1 = String(Math.round(input))[i] + "." + Var1;
+					ii = 0;
+				} else {
+					Var1 = String(Math.round(input))[i] + Var1;
 				}
-				return Var1
-		} else {return input}
+				ii++;
+			}
+			return Var1
+		}
 	}
 
 
 	function update() {
 		// document.getElementById
 
+		if (Game.Tutorial) {document.getElementById("Tutorial").style.display = "none"}
+
+		if (Game.Multi.Auto) {Multi_Max()}
+		if (Game.Rebirth.Auto) {Rebirth_Max()}
+
+		document.getElementById("Coin").textContent = `Coin: ${zahl(Game.Coin)}`
+		document.getElementById("Power").textContent = `Power: ${zahl(Game.Multi.Anzahl * Math.pow(2, Game.Rebirth.Anzahl))}`
+
 		for (let i = 1; i <= 6; i++) {
 			if (Auswahl == i) {
-				document.getElementById(`Tab_I${i}`).style.bottom = "2px"
+				document.getElementById(`Tab_I${i}`).style.bottom = "3px"
+				document.getElementById(`Tab_I${i}`).style.fontSize = "larger"
+				document.getElementById(`Tab_I${i}`).style.fontWeight = "bold"
 			} else {
 				document.getElementById(`Tab_I${i}`).style.bottom = "0px"
+				document.getElementById(`Tab_I${i}`).style.fontSize = "large"
+				document.getElementById(`Tab_I${i}`).style.fontWeight = "normal"
 			}
 		}
 		if (Auswahl == 1) {
@@ -250,6 +316,13 @@
 		}
 		if (Auswahl == 2) {
 			document.getElementById("M_Upgrade").style.display = "block"
+			
+
+			document.getElementById("Multi Costen").textContent = `Costen: ${(Game.Multi.Costen / ((Game.Multi.Rabat / 100) + 1))}`
+			document.getElementById("Multi Anzahl").textContent = `Anzahl: ${Game.Multi.Anzahl}`
+
+			document.getElementById("Rebirth Costen").textContent = `Costen: ${Game.Rebirth.Costen}`
+			document.getElementById("Rebirth Anzahl").textContent = `Anzahl: ${Game.Rebirth.Anzahl}`
 		} else {
 			document.getElementById("M_Upgrade").style.display = "none"
 		}
@@ -265,25 +338,85 @@
 		let Crit_Multi = 1
 		while (Math.round(Math.random() * 100) < Game.Crit - ((Crit_Multi - 1) * 10)) {Crit_Multi += 1}
 		Game.Coin += (Game.Multi.Anzahl * Math.pow(2, Game.Rebirth.Anzahl)) * Math.pow(2, Crit_Multi - 1);
-		Game.Status.Coin += (Game.Multi.Anzahl * Math.pow(2, Game.Rebirth.Anzahl)) * Math.pow(2, Crit_Multi - 1);
-		Game.Status.Click += 1;
 
+		update()
+	}
+
+	function Multi_Buy() {
+		if (Game.Coin >= (Game.Multi.Costen / ((Game.Multi.Rabat / 100) + 1))) {
+			Game.Coin -= Game.Multi.Costen;
+			Game.Multi.Anzahl += 1;
+			Game.Multi.Costen *= 2
+		}
+		update()
+	}
+	function Multi_Max() {
+		while (Game.Coin >= (Game.Multi.Costen / ((Game.Multi.Rabat / 100) + 1))) {
+			if (Game.Coin >= (Game.Multi.Costen / ((Game.Multi.Rabat / 100) + 1))) {
+				Game.Coin -= Game.Multi.Costen;
+				Game.Multi.Anzahl += 1;
+				Game.Multi.Costen *= 2
+			} else {
+				return
+			}
+		}
+		update()
+	}
+	function Multi_Auto() {
+		Game.Multi.Auto = !Game.Multi.Auto
+		update()
+	}
+
+	function Rebirth_Buy() {
+		if (Game.Coin >= (Game.Rebirth.Costen / ((Game.Rebirth.Rabat / 100) + 1))) {
+			Game.Coin -= Game.Rebirth.Costen;
+			Game.Rebirth.Anzahl += 1;
+			Game.Rebirth.Costen *= 2
+			Game.Multi.Anzahl = 1;
+			Game.Multi.Costen = 10;
+		}
+		update()
+	}
+	function Rebirth_Max() {
+		while (Game.Coin >= (Game.Rebirth.Costen / ((Game.Rebirth.Rabat / 100) + 1))) {
+			if (Game.Coin >= (Game.Rebirth.Costen / ((Game.Rebirth.Rabat / 100) + 1))) {
+				Game.Coin -= Game.Rebirth.Costen;
+				Game.Rebirth.Anzahl += 1;
+				Game.Rebirth.Costen *= 2
+			} else {
+				Game.Multi.Anzahl = 1;
+				Game.Multi.Costen = 10;
+				return
+			}
+		}
+		update()
+	}
+	function Rebirth_Auto() {
+		Game.Rebirth.Auto = !Game.Rebirth.Auto
+		update()
+	}
+
+
+	function Turorial_done() {
+		Game.Tutorial = true
 		update()
 	}
 
 
 	function Save() {
-		localStorage.setItem("Game", JSON.stringify({Data : Game, Version : 6}))
+		localStorage.setItem("Game v6", JSON.stringify(Game))
+		console.log("Save")
 	}
 	function Load() {
-		let Da = JSON.parse(localStorage.getItem("Game"))
-		if (Da == null) {return}
-		if (Da.Version == 6) {
-			Game = Da.Data
-		}
+		if (localStorage.getItem("Game v6") == "null") {return}
+		let Data = JSON.parse(localStorage.getItem("Game v6"))
+		if (Data == null) {return}
+		Game = Data
+		console.log("Load")
+		console.log(Data)
 	}
 	function Save_als() {
-		const url = URL.createObjectURL(new Blob([JSON.stringify({Data : Game, Version : 6})]))
+		const url = URL.createObjectURL(new Blob([JSON.stringify(Game)]))
 
 		const a = document.createElement("a");
         a.href = url;
@@ -291,6 +424,7 @@
         a.click();
 
 		URL.revokeObjectURL(url);
+		console.log("Save")
 	}
 	function Load_als() {
 		const input = document.createElement("input");
@@ -302,33 +436,29 @@
 			
 			const reader = new FileReader();
 			reader.onload = () => {
-					Game = JSON.parse(reader.result).Data
+					Game = JSON.parse(reader.result)
 					update()
+					console.log("Load")
+					console.log(Game)
 				}
 				reader.readAsText(file);
 			})
 			input.click();
 	}
-	function Not_Save() {
-		if (confirm("Wilst du speichern")) {
-			Save_als()
-		} else {
-			if (confirm("Wirklich nicht Speichern")) {
-				Save_als()
-			}
+	function Zurücksetzen() {
+		if (confirm("Wilst du wirklich Zurücksetzen")) {
+			Game = null
+			location.reload()
 		}
 	}
-	function Zurücksetzen() {
-		localStorage.clear()
-		onbeforeunload = null;
-		location.reload()
-	}
-	onbeforeunload = Not_Save;
 	Load()
+	setInterval(Save,1000)
 
-	window.addEventListener("resize", function() {
-		document.body.style.zoom = Math.min(1, window.innerWidth / (1920 / 2));
-	});
+	function resize() {
+		document.body.style.zoom = Math.min(window.innerWidth / 800,window.innerHeight / 800);
+	}
+	window.addEventListener("resize", resize);
+	resize()
 
 	update()
 </script>
