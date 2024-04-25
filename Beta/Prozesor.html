@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Prozesor</title>
+    </head>
+    <body>
+        
+    </body>
+    <script>
+        let Prozesor = [];
+
+        let sektor = 10;
+        let box = 10;
+        let zell = 10;
+
+        let Test1 = 0;
+        let Test2 = 2;
+        let Test3 = 1;
+        let Test4 = 4;
+        function c_Zell() {
+            return [Test1,Test2,Test3,Test4]
+        }
+        function c_Box() {
+            let iii = [];
+            for (let zx = 0; zx < zell; zx++) {
+                for (let zy = 0; zy < zell; zy++) {
+                    setInterval(1, iii.push(c_Zell()))
+                }
+            }
+            return iii
+        }
+        function c_Sektor() {
+            let ii = [];
+            for (let bx = 0; bx < box; bx++) {
+                for (let by = 0; by < box; by++) {
+                    setInterval(1, ii.push(c_Box()))
+                }
+            }
+            return ii
+        }
+        function c_Prozesor() {
+            let i = [];
+            for (let sx = 0; sx < sektor; sx++) {
+                for (let sy = 0; sx < sektor; sy++) {
+                    setInterval(1, i.push(c_Sektor()))
+                }
+            }
+            return i
+        }
+        Prozesor = c_Prozesor();
+    </script>
+</html>
