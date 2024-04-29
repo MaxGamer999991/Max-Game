@@ -104,16 +104,29 @@
 			</div>
 		</div>
 
+		<div id="M_Level">
+			<div class="Fenster">
+				<h3 class="Head">Level ::</h3>
+			</div>
+		</div>
+
 		<div id="M_Einstelung">
-			<div>
-				<button class="Button" onclick="Save()">Speichern Cloud</button>
-				<button class="Button" onclick="Load()">Laden Cloud</button>
+			<div class="Fenster">
+				<div>
+					<button class="Button" onclick="Save()">Speichern Cloud</button>
+					<button class="Button" onclick="Load()">Laden Cloud</button>
+				</div>
+				<div>
+					<button class="Button" onclick="Save_als()">Speichern Datai</button>
+					<button class="Button" onclick="Load_als()">Laden Datai</button>
+				</div>
+				<button class="Button" style="background-color: red;" onclick="Zurücksetzen()">Zurücksetzen</button>
 			</div>
-			<div>
-				<button class="Button" onclick="Save_als()">Speichern Datai</button>
-				<button class="Button" onclick="Load_als()">Laden Datai</button>
+
+			<div class="Fenster">
+				<button class="Button">+</button>
+				<button class="Button" onclick="Game.Einstelung.Zoom = Math.round(Math.max(0.5, Game.Einstelung.Zoom - 0.1) * 10) / 10; resize()">-</button>
 			</div>
-			<button class="Button" style="background-color: red;" onclick="Zurücksetzen()">Zurücksetzen</button>
 		</div>
 
 		<div>
@@ -128,12 +141,12 @@
 				background: lightgray;
 				height: 32px;
 			">
-				<button style="position: relative; bottom: 0px;" id="Tab_I1" onclick="Game.Auswahl = 1; update()" class="Button">Home</button>
-				<button style="position: relative; bottom: 0px;" id="Tab_I2" onclick="Game.Auswahl = 2; update()" class="Button">Upgrade</button>
-				<button style="position: relative; bottom: 0px;" id="Tab_I3" onclick="Game.Auswahl = 3; update()" class="Button">Shop</button>
-				<button style="position: relative; bottom: 0px;" id="Tab_I4" onclick="Game.Auswahl = 4; update()" class="Button">Level</button>
-				<button style="position: relative; bottom: 0px;" id="Tab_I5" onclick="Game.Auswahl = 5; update()" class="Button">Rang</button>
-				<button style="position: relative; bottom: 0px;" id="Tab_I6" onclick="Game.Auswahl = 6; update()" class="Button">Einstelung</button>
+				<button style="position: relative; bottom: 0px;" id="Tab_I1" onclick="Auswahl = 1; update()" class="Button">Home</button>
+				<button style="position: relative; bottom: 0px;" id="Tab_I2" onclick="Auswahl = 2; update()" class="Button">Upgrade</button>
+				<button style="position: relative; bottom: 0px;" id="Tab_I3" onclick="Auswahl = 3; update()" class="Button">Shop</button>
+				<button style="position: relative; bottom: 0px;" id="Tab_I4" onclick="Auswahl = 4; update()" class="Button">Level</button>
+				<button style="position: relative; bottom: 0px;" id="Tab_I5" onclick="Auswahl = 5; update()" class="Button">Rang</button>
+				<button style="position: relative; bottom: 0px;" id="Tab_I6" onclick="Auswahl = 6; update()" class="Button">Einstelung</button>
 			</div>
 		</div>
 		<div id="Tutorial">
@@ -170,9 +183,8 @@
 <script>
 	if (location.host != "maxgamer999991.github.io") {document.getElementById("Zurück").style.display = "none"}
 
-	
+	var Auswahl = 1;
 	var Game = {
-		Auswahl : 1,
 		Coin : 0,
 
 
@@ -208,6 +220,10 @@
 
 		Crit : 0,
 		Tutorial : false,
+
+		Einstelung : {
+			Zoom : 1,
+		}
 	}
 
 	function Level_() {
@@ -300,7 +316,7 @@
 		document.getElementById("Power").textContent = `Power: ${zahl(Game.Multi.Anzahl * Math.pow(2, Game.Rebirth.Anzahl))}`
 
 		for (let i = 1; i <= 6; i++) {
-			if (Game.Auswahl == i) {
+			if (Auswahl == i) {
 				document.getElementById(`Tab_I${i}`).style.bottom = "3px"
 				document.getElementById(`Tab_I${i}`).style.fontSize = "larger"
 				document.getElementById(`Tab_I${i}`).style.fontWeight = "bold"
@@ -310,47 +326,29 @@
 				document.getElementById(`Tab_I${i}`).style.fontWeight = "normal"
 			}
 		}
-		if (Game.Auswahl == 1) {
+		if (Auswahl == 1) {
 			document.getElementById("M_Home").style.display = "block"
 		} else {
 			document.getElementById("M_Home").style.display = "none"
 		}
-		if (Game.Auswahl == 2) {
+		if (Auswahl == 2) {
 			document.getElementById("M_Upgrade").style.display = "block"
 			
 
 			document.getElementById("Multi Costen").textContent = `Costen: ${(Game.Multi.Costen / ((Game.Multi.Rabat / 100) + 1))}`
 			document.getElementById("Multi Anzahl").textContent = `Anzahl: ${Game.Multi.Anzahl}`
 
-			if (Game.Level >= 1) {
-				if (Game.Shop.Multi_max) {
-					document.getElementById("Multi Max").textContent = "Kaufe Alles";
-				} else {
-					document.getElementById("Multi Max").textContent = "- Kostet 2 Rebirth -";
-				}
-				document.getElementById("Multi Max").style.display = "inline-block";
-			} else {
-				document.getElementById("Multi Max").style.display = "none";
-			}
-			if (Game.Level >= 4) {
-				if (Game.Shop.Multi_auto) {
-					document.getElementById("Multi Auto").textContent = "Kaufe Auto";
-				} else {
-					document.getElementById("Multi Auto").textContent = "- Kostet 10 Rebirth -";
-				}
-				document.getElementById("Multi Auto").style.display = "inline-block";
-			} else {
-				document.getElementById("Multi Auto").style.display = "none";
-			}
-
-
-
 			document.getElementById("Rebirth Costen").textContent = `Costen: ${Game.Rebirth.Costen}`
 			document.getElementById("Rebirth Anzahl").textContent = `Anzahl: ${Game.Rebirth.Anzahl}`
 		} else {
 			document.getElementById("M_Upgrade").style.display = "none"
 		}
-		if (Game.Auswahl == 6) {
+		if (Auswahl == 4) {
+			document.getElementById("M_Einstelung").style.display = "block"
+		} else {
+			document.getElementById("M_Einstelung").style.display = "none"
+		}
+		if (Auswahl == 6) {
 			document.getElementById("M_Einstelung").style.display = "block"
 		} else {
 			document.getElementById("M_Einstelung").style.display = "none"
@@ -396,27 +394,22 @@
 			Game.Coin -= Game.Rebirth.Costen;
 			Game.Rebirth.Anzahl += 1;
 			Game.Rebirth.Costen *= 2
-			Game.Coin = 0
 			Game.Multi.Anzahl = 1;
 			Game.Multi.Costen = 10;
 		}
 		update()
 	}
 	function Rebirth_Max() {
-		var i = false;
 		while (Game.Coin >= (Game.Rebirth.Costen / ((Game.Rebirth.Rabat / 100) + 1))) {
 			if (Game.Coin >= (Game.Rebirth.Costen / ((Game.Rebirth.Rabat / 100) + 1))) {
 				Game.Coin -= Game.Rebirth.Costen;
 				Game.Rebirth.Anzahl += 1;
-				Game.Rebirth.Costen *= 2;
-				i = true;
+				Game.Rebirth.Costen *= 2
+			} else {
+				Game.Multi.Anzahl = 1;
+				Game.Multi.Costen = 10;
+				return
 			}
-		}
-		if (i) {
-			Game.Coin = 0
-			Game.Multi.Anzahl = 1;
-			Game.Multi.Costen = 10;
-			return
 		}
 		update()
 	}
@@ -484,7 +477,7 @@
 	setInterval(Save,1000)
 
 	function resize() {
-		document.body.style.zoom = Math.min(window.innerWidth / 800,window.innerHeight / 800);
+		document.body.style.zoom = Math.min(window.innerWidth / 800,window.innerHeight / 800) * Game.Einstelung.Zoom;
 	}
 	window.addEventListener("resize", resize);
 	resize()
