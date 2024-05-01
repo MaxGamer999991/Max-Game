@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Desin</title>
+    </head>
+    <body>
+        <style>
+            .Switch#div {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+            }
+            .Switch#background {
+                position: absolute;
+                width: 100px;
+                height: 40px;
+                background-color: gray;
+                border-radius: 20px;
+            }
+            .Switch#buttom {
+                position: absolute;
+                top: 10px;
+                width: 20px;
+                height: 20px;
+                background-color: black;
+                border-radius: 10px;
+            }
+        </style>
+        <div class="Switch" id="div">
+            <div class="Switch" id="background"></div>
+            <div class="Switch" id="buttom"></div>
+        </div>
+        <script>
+            var Switch_x = 0
+            var Switch_click = false
+
+            var Mouse
+
+            const Switch = document.getElementsByClassName("Switch")
+            Switch.background.addEventListener("mousedown", () => {Switch_click = true})
+            Switch.buttom.addEventListener("mousedown", () => {Switch_click = true})
+            Switch.background.addEventListener("click", () => {
+                if (Switch_x < 40) {
+                    Switch_x = 70
+                } else {
+                    Switch_x = 10
+                }
+            })
+            Switch.buttom.addEventListener("click", () => {
+                if (Switch_x < 40) {
+                    Switch_x = 70
+                } else {
+                    Switch_x = 10
+                }
+            })
+            addEventListener("mouseup", () => {Switch_click = false})
+            addEventListener("mousemove", (mouse) => {Mouse = mouse.x})
+
+            setInterval(() => {
+                if (Switch_click) {
+                    Switch_x = ((Switch_x * 9) + (Mouse - 30)) / 10
+                } else {
+                    if (Switch_x > 40) {
+                        Switch_x = ((Switch_x * 9) + 70) / 10
+                    } else {
+                        Switch_x = ((Switch_x * 9) + 10) / 10
+                    }
+                }
+                Switch.buttom.style.left = Math.max(10,Math.min(70,Switch_x)) + "px"
+            }, 10)
+
+            function resize() {
+                document.body.style.zoom = Math.min(window.innerWidth / 800,window.innerHeight / 800) * Game.Einstelung.Zoom;
+            }
+            window.addEventListener("resize", resize);
+            resize()
+        </script>
+    </body>
+</html>

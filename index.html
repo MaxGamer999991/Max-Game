@@ -28,6 +28,12 @@
 			padding: 5px;
             padding-block: 10px;
         }
+        #Desin {
+            margin: 10px;
+			padding: 5px;
+			background-color: lightgray;
+			border-radius: 10px;
+        }
     </style>
     <body>
         <h1>Max Game</h1>
@@ -36,9 +42,13 @@
                 <h3 style="margin-block: 7px;">Clicky</h3>
                 <p style="margin: 12px; font-size: x-small;">(Mit Local Speicher)</p>
             </div>
-            <a href="https://maxgamer999991.github.io/Max-Game/Clicky/Beta.html">Beta</a>
+            <div style="display: flex; align-items: center;">
+                <a href="https://maxgamer999991.github.io/Max-Game/Clicky/Beta.html">Beta</a>
+                <p style="margin: 5px; font-size: 10px;"><- Teste Halb V6.0</p>
+            </div>
             <a href="https://maxgamer999991.github.io/Max-Game/Clicky/Clicky v5.0.html">V5.0</a>
             <div class="Space"></div>
+
             <button onclick="Clicky.C = !Clicky.C; update()">Version</button>
             <div id="C">
                 <div style="
@@ -172,6 +182,11 @@
                 </div>
             </div>
         </div>
+        <div id="Desin">
+            <h3 style="margin-block: 7px;">Desin</h3>
+            <a href="https://maxgamer999991.github.io/Max-Game/Desin/">Hier Clicken</a>
+            <div class="Space"></div>
+        </div>
     </body>
     <script>
         var Clicky = {
@@ -217,9 +232,11 @@
             }
         }
 
-        window.addEventListener("resize", function() {
-            document.body.style.zoom = Math.min(1, window.innerWidth / 400);
-        });
+        function resize() {
+            document.body.style.zoom = Math.min(window.innerWidth / 500,window.innerHeight / 500);
+        }
+        window.addEventListener("resize", resize);
+        resize()
 
         update()
     </script>
