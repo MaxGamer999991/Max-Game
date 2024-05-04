@@ -16,6 +16,7 @@
 			border-color: dimgray;
 			border-style: solid;
 			display: block;
+			cursor: pointer;
 		}
 
 		.Fenster {
@@ -123,9 +124,15 @@
 				<button class="Button" style="background-color: red;" onclick="Zurücksetzen()">Zurücksetzen</button>
 			</div>
 
-			<div class="Fenster">
-				<button class="Button">+</button>
+			<div class="Fenster" style="display: flex;">
+				<p style="margin: 5px;">Zoom: </p>
+				<button class="Button" onclick="Game.Einstelung.Zoom = Math.round(Math.min(2,   Game.Einstelung.Zoom + 0.1) * 10) / 10; resize()">+</button>
 				<button class="Button" onclick="Game.Einstelung.Zoom = Math.round(Math.max(0.5, Game.Einstelung.Zoom - 0.1) * 10) / 10; resize()">-</button>
+			</div>
+
+			<div class="Fenster" style="display: flex;">
+				<p style="margin: 5px;">Tutorial: </p>
+				<button class="Button" onclick="Game.Tutorial = 0; update()">Neu Starten</button>
 			</div>
 		</div>
 
@@ -169,6 +176,7 @@
 			<div class="Fenster" id="Text">
 				<h3 class="Head">Text</h3>
 
+				<p>(In Arbeit)</p>
 				<p>Clicky ist ein spiel wo man Clicken und Upgrads und ein Shop hat</p>
 				<p>Wenn man Clickt bekommt man Coin wie viel man bekommt bestimt die Power</p>
 				<p>Um mehr Power zu bekommen braucht man Upgrads aber um Upgrade zu bekommen brauch man Coin</p>
@@ -177,7 +185,7 @@
 				<button class="Button" style="position: absolute; left: 0px; bottom: 0px; right: 0px;" onclick="Turorial_done()">Schließen</button>
 			</div>
 		</div>
-		<button id="Zurück"><</button>
+		<button id="Zurück" onclick="location.replace('https://maxgamer999991.github.io/Max-Game/')"><</button>
 	</body>
 </html>
 <script>
@@ -219,7 +227,7 @@
 		},
 
 		Crit : 0,
-		Tutorial : false,
+		Tutorial : 0,
 
 		Einstelung : {
 			Zoom : 1,
@@ -307,7 +315,11 @@
 	function update() {
 		// document.getElementById
 
-		if (Game.Tutorial) {document.getElementById("Tutorial").style.display = "none"}
+		if (Game.Tutorial === true) {
+			document.getElementById("Tutorial").style.display = "none"
+		} else {
+			document.getElementById("Tutorial").style.display = "block"
+		}
 
 		if (Game.Multi.Auto) {Multi_Max()}
 		if (Game.Rebirth.Auto) {Rebirth_Max()}
@@ -344,9 +356,9 @@
 			document.getElementById("M_Upgrade").style.display = "none"
 		}
 		if (Auswahl == 4) {
-			document.getElementById("M_Einstelung").style.display = "block"
+			document.getElementById("M_Level").style.display = "block"
 		} else {
-			document.getElementById("M_Einstelung").style.display = "none"
+			document.getElementById("M_Level").style.display = "none"
 		}
 		if (Auswahl == 6) {
 			document.getElementById("M_Einstelung").style.display = "block"
