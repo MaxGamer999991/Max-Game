@@ -177,9 +177,10 @@
 				<h3 class="Head">Text</h3>
 
 				<p>(In Arbeit)</p>
-				<p>Clicky ist ein spiel wo man Clicken und Upgrads und ein Shop hat</p>
+				<p>Clicky ist ein spiel wo man Clicken und Upgrads kann und ein Shop hat</p>
 				<p>Wenn man Clickt bekommt man Coin wie viel man bekommt bestimt die Power</p>
 				<p>Um mehr Power zu bekommen braucht man Upgrads aber um Upgrade zu bekommen brauch man Coin</p>
+				<p>Es gibt Mehre </p>
 				<p>Es gibt auch den Shop den man später freischaltet im Shop kann man dinge kaufen die z.B.: "Multi Rabat" das mach das Multi Weniger Kostet</p>
 
 				<button class="Button" style="position: absolute; left: 0px; bottom: 0px; right: 0px;" onclick="Turorial_done()">Schließen</button>
@@ -391,10 +392,10 @@
 				Game.Multi.Anzahl += 1;
 				Game.Multi.Costen *= 2
 			} else {
+				update()
 				return
 			}
 		}
-		update()
 	}
 	function Multi_Auto() {
 		Game.Multi.Auto = !Game.Multi.Auto
@@ -420,10 +421,10 @@
 			} else {
 				Game.Multi.Anzahl = 1;
 				Game.Multi.Costen = 10;
+				update()
 				return
 			}
 		}
-		update()
 	}
 	function Rebirth_Auto() {
 		Game.Rebirth.Auto = !Game.Rebirth.Auto
