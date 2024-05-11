@@ -108,6 +108,11 @@
 		<div id="M_Level">
 			<div class="Fenster">
 				<h3 class="Head" id="Level">Level ::</h3>
+				<div style="margin: 10px;">
+					<p style="margin: 0px;" id="Level Foderungen">Foderungen</p>
+					<p style="margin: 0px;" id="Level Belonung">Belonung</p>
+				</div>
+				<button class="Button" id="Level button" onclick="Level()">Sammeln</button>
 			</div>
 		</div>
 
@@ -240,43 +245,43 @@
 			case 4:
 				return {
 					Level : "4",
-					Costentext : `${Rebirth.Anzahl}/100 Rebirth`,
-					Costen : Rebirth.Anzahl,
+					Costentext : `${Game.Rebirth.Anzahl}/100 Rebirth`,
+					Costen : Game.Rebirth.Anzahl,
 					Costen1 : 100,
 					Belonung : "Rebirth Auto Kaufen",
-					Don : (Rebirth.Anzahl >= 100)}
+					Don : (Game.Rebirth.Anzahl >= 100)}
 			case 3:
 				return {
 					Level : "3",
-					Costentext : `${Rebirth.Anzahl}/50 Rebirth`,
-					Costen : Rebirth.Anzahl,
+					Costentext : `${Game.Rebirth.Anzahl}/50 Rebirth`,
+					Costen : Game.Rebirth.Anzahl,
 					Costen1 : 50,
 					Belonung : "Multi Auto Kaufen, Rang, Rebirth Alles Kaufen",
-					Don : (Rebirth.Anzahl >= 50)}
+					Don : (Game.Rebirth.Anzahl >= 50)}
 			case 2:
 				return {
 					Level : "2",
-					Costentext : `${Rebirth.Anzahl}/25 Rebirth`,
-					Costen : Rebirth.Anzahl,
+					Costentext : `${Game.Game.Rebirth.Anzahl}/25 Rebirth`,
+					Costen : Game.Rebirth.Anzahl,
 					Costen1 : 25,
 					Belonung : "Super Coin",
-					Don : (Rebirth.Anzahl >= 25)}
+					Don : (Game.Rebirth.Anzahl >= 25)}
 			case 1:
 				return {
 					Level : "1",
-					Costentext : `${Rebirth.Anzahl}/15 Rebirth`,
-					Costen : Rebirth.Anzahl,
+					Costentext : `${Game.Rebirth.Anzahl}/15 Rebirth`,
+					Costen : Game.Rebirth.Anzahl,
 					Costen1 : 15,
 					Belonung : "Laden",
-					Don : (Rebirth.Anzahl >= 15)}
+					Don : (Game.Rebirth.Anzahl >= 15)}
 			case 0:
 				return {
 					Level : "0",
-					Costentext : `${Rebirth.Anzahl}/5 Rebirth`,
-					Costen : Rebirth.Anzahl,
+					Costentext : `${Game.Rebirth.Anzahl}/5 Rebirth`,
+					Costen : Game.Rebirth.Anzahl,
 					Costen1 : 5,
 					Belonung : "Multi Alles Kaufen",
-					Don : (Rebirth.Anzahl >= 5)}
+					Don : (Game.Rebirth.Anzahl >= 5)}
 			default:
 				return {
 					Costentext : "Das Ende",
@@ -358,6 +363,14 @@
 		}
 		if (Auswahl == 4) {
 			document.getElementById("M_Level").style.display = "block"
+			document.getElementById("Level").textContent = `Level ${Game.Level}`;
+			document.getElementById("Level Foderungen").textContent = `Foderungen: ${Level_().Costentext}`;
+			document.getElementById("Level Belonung").textContent = `Belonung: ${Level_().Belonung}`;
+			if (Level_().Don) {
+				document.getElementById("Level button").style.backgroundColor = "green"
+			} else {
+				document.getElementById("Level button").style.backgroundColor = ""
+			}
 		} else {
 			document.getElementById("M_Level").style.display = "none"
 		}
@@ -434,6 +447,13 @@
 
 	function Turorial_done() {
 		Game.Tutorial = true
+		update()
+	}
+
+	function Level() {
+		if (Level_().Don) {
+			Game.Level += 1;
+		}
 		update()
 	}
 
