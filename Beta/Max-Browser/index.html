@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Browser</title>
+    </head>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #Ober {
+            display: flex;
+            flex-direction: row;
+        }
+
+        #Sitebar {
+            display: block;
+
+            width: 50px;
+
+            position: absolute;
+            top: 0;
+            bottom: 0;
+        }
+
+        #Sitebar_animation {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+
+            width: 50px;
+            background-color: darkgray;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+        }
+
+        #Sitebar_open {
+            position: absolute;
+            top:    5px ;
+            left:   5px ;
+            width:  40px;
+            height: 40px;
+
+            padding: 0;
+            background-color: darkgray;
+
+            border-style: solid;
+            border-width: 5px;
+            border-color: dimgray;
+            border-radius: 100%;
+
+            rotate: 0deg;
+        }
+    </style>
+    <body>
+        <div id="Ober">
+            <div id="Sitebar">
+                <div id="Sitebar_animation">
+                    <button id="Sitebar_open"><</button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        SiteBar = false;
+        async function SiteBar_click() {
+            
+        }
+    </script>
+</html>
