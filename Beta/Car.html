@@ -17,8 +17,6 @@
     let angle = 0;
     let turn = 0;
 
-    let angelh = 0;
-
     let Up    = false;
     let Down  = false;
     let Left  = false;
@@ -57,10 +55,9 @@
         x += dx
         y += dy
 
-        if (Math.pow(2, Math.pow(0.5, dx + dy) - 1) - 1 != 0) {angle += turn * (Math.abs(Math.pow(2, Math.pow(0.5, dx + dy) - 1) - 1) / 100)}
-        if (Math.pow(2, Math.pow(0.5, dx + dy) - 1) - 1 != 0) {angelh = turn * (Math.abs(Math.pow(2, Math.pow(0.5, dx + dy) - 1) - 1) / 100)}
+        angle += turn * (speed * 0.2)
 
-        document.getElementById("Angel").textContent = angelh;
+        document.getElementById("Angel").textContent = Math.sqrt(Math.pow(Math.sin(angle * Math.PI / 180) * dx,2) + Math.pow(Math.cos(angle * Math.PI / 180) * dy,2));
         document.getElementById("Auto").style.left = x + "px";
         document.getElementById("Auto").style.top  = y + "px";
         document.getElementById("Auto").style.transform = `rotate(${90 - angle}deg) scale(1.5)`;
