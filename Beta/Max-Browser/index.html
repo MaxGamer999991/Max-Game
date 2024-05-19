@@ -8,22 +8,7 @@
             margin: 0;
         }
 
-        #Ober {
-            display: flex;
-            flex-direction: row;
-        }
-
         #Sitebar {
-            display: block;
-
-            width: 50px;
-
-            position: absolute;
-            top: 0;
-            bottom: 0;
-        }
-
-        #Sitebar_animation {
             display: flex;
             flex-direction: column;
             flex-wrap: nowrap;
@@ -38,36 +23,52 @@
         }
 
         #Sitebar_open {
-            position: absolute;
+            position: fixed;
             top:    5px ;
             left:   5px ;
             width:  40px;
             height: 40px;
 
-            padding: 0;
             background-color: darkgray;
 
             border-style: solid;
             border-width: 5px;
             border-color: dimgray;
             border-radius: 100%;
+        }
 
-            rotate: 0deg;
+        #Main {
+            position: absolute;
+            top: 0;
+            left: 50px;
+            right: 0;
+            bottom: 0;
         }
     </style>
     <body>
-        <div id="Ober">
+        <div id="Main">
+            <div id="URL">
+                <button id="URL_zurück"><</button>
+                <button id="URL_weiter">></button>
+                
+                <input  id="URL_URL" type="url">
+            </div>
             <div id="Sitebar">
-                <div id="Sitebar_animation">
-                    <button id="Sitebar_open"><</button>
-                </div>
+                <button id="Sitebar_open" onclick="SiteBar_click()"><</button>
             </div>
         </div>
     </body>
     <script>
-        SiteBar = false;
-        async function SiteBar_click() {
-            
+        var SiteBar = false;
+        var Sitebar_v = 0;
+        function SiteBar_click() {
+            SiteBar = !SiteBar
         }
+        setInterval(() => {
+            Sitebar_v = ((Sitebar_v*9)+(SiteBar*100))/10
+            document.getElementById("Sitebar").style.left        = `${     Sitebar_v *-0.5}px`
+            document.getElementById("Sitebar_open").style.rotate = `${     Sitebar_v * 1.8}deg`
+            document.getElementById("Main").style.left           = `${(100-Sitebar_v)* 0.5}px`
+        }, 10)
     </script>
 </html>
