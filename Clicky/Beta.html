@@ -1,238 +1,285 @@
 <!DOCTYPE html>
-<html style="font-family: sans-serif; touch-action: manipulation; zoom: 1.5; overflow-y: scroll;">
-	<head>
-		<title>Clicky v6.0</title>
-		<link rel="icon" href="https://raw.githubusercontent.com/MaxGamer999991/Max-Game/main/Clicky/Icon.png">
-	</head>
-	<style>
-		#Zurück {
+<html style="font-family: sans-serif; touch-action: manipulation; zoom: 1.5; overflow: hidden;">
+<head>
+	<title>Clicky v6.0</title>
+	<link rel="icon" href="https://raw.githubusercontent.com/MaxGamer999991/Max-Game/main/Clicky/Icon.png">
+</head>
+<style>
+	#Zurück {
+		position: absolute;
+		top: -10px;
+		left: -10px;
+		height: 35px;
+		width: 35px;
+		background-color: lightgray;
+		border-radius: 10px;
+		border-color: dimgray;
+		border-style: solid;
+		display: block;
+		cursor: pointer;
+	}
+
+	.Fenster {
+		margin: 10px;
+		padding: 5px;
+		background-color: lightgray;
+		border-radius: 10px;
+	}
+	.Head {
+		margin-block: 0px;
+		padding: 10px;
+		border-radius: 10px;
+		background: darkgray;
+	}
+	.Button {
+		margin: 2px;
+		font-size: large;
+		border: darkgray;
+		border-width: 3px;
+		border-style: solid;
+		border-radius: 10px;
+		cursor: pointer;
+	}
+	div.Mittel {
+		position: absolute;
+		top: 130px;
+		left: 0;
+		right: 0;
+		bottom: 50px;
+		align-items: center;
+		justify-content: center;
+	}
+
+	#Willkommen {
+		position: absolute;
+		inset: 20px;
+		border-color: dimgray;
+		border-width: 5px;
+		border-style: solid;
+	}
+	#Text {
+		position: absolute;
+		inset: 20px;
+		border-color: dimgray;
+		border-width: 5px;
+		border-style: solid;
+		display: none;
+	}
+</style>
+<body>
+	<h1 style="text-align: center; margin-bottom: 5px;">Clicky</h1>
+	
+	<div style="text-align: center; margin-bottom: 20px;">
+		<h3 style="margin: 0;" id="Coin">Coin: 0</h3>
+		<p  style="margin: 0;" id="Power">Power: 0</p>
+	</div>
+
+
+	<div id="M_Home">
+		<button style="
 			position: absolute;
-			top: -10px;
-			left: -10px;
-			height: 35px;
-			width: 35px;
-			background-color: lightgray;
-			border-radius: 10px;
-			border-color: dimgray;
-			border-style: solid;
-			display: block;
+			left: 0;
+			right: 0;
+			top: 130px;
+			bottom: 50px;
+			border-style: none;
+			font-size: x-large;
+			font-weight: bold;
 			cursor: pointer;
-		}
+			touch-action: none;" onclick="Click()">Click</button>
+	</div>
 
-		.Fenster {
-			margin: 10px;
-			padding: 5px;
-			background-color: lightgray;
-			border-radius: 10px;
-		}
-		.Head {
-			margin-block: 0px;
-			padding: 10px;
-			border-radius: 10px;
-			background: darkgray;
-		}
-		.Button {
-			margin: 2px;
-			font-size: large;
-			border: darkgray;
-			border-width: 3px;
-			border-style: solid;
-			border-radius: 10px;
-			cursor: pointer;
-		}
-
-		#Willkommen {
-			position: absolute;
-			inset: 20px;
-			border-color: dimgray;
-			border-width: 5px;
-			border-style: solid;
-		}
-		#Text {
-			position: absolute;
-			inset: 20px;
-			border-color: dimgray;
-			border-width: 5px;
-			border-style: solid;
-			display: none;
-		}
-	</style>
-	<body>
-		<h1 style="text-align: center; margin-bottom: 5px;">Clicky</h1>
-		
-		<div style="text-align: center; margin-bottom: 20px;">
-			<h3 style="margin: 0;" id="Coin">Coin: 0</h3>
-			<p  style="margin: 0;" id="Power">Power: 0</p>
-		</div>
-
-
-		<div id="M_Home">
-			<button style="
-				position: absolute;
-				left: 0;
-				right: 0;
-				top: 130px;
-				bottom: 50px;
-				border-style: none;
-				font-size: x-large;
-				font-weight: bold;" onclick="Click()">Click</button>
-		</div>
-
-		<div id="M_Upgrade">
-			<div class="Fenster">
-				<h3 class="Head">Multi</h3>
-				<div>
-					<div style="margin: 10px;">
-						<p style="margin: 0px;" id="Multi Costen">Kosten: 10</p>
-						<p style="margin: 0px;" id="Multi Anzahl">Anzahl: 1</p>
-					</div>
-					<button class="Button" id="Multi Kaufen" onclick="Multi_Buy()">Kaufen</button>
-					<button class="Button" id="Multi Max" onclick="Multi_Max()">Kaufen Alles</button>
-					<button class="Button" id="Multi Auto" onclick="Multi_Auto()">Kaufen Auto</button>
-				</div>
-			</div>
-			<div class="Fenster">
-				<h3 class="Head">Rebirth</h3>
-				<div>
-					<div style="margin: 10px;">
-						<p style="margin: 0px;" id="Rebirth Costen">Kosten: 10</p>
-						<p style="margin: 0px;" id="Rebirth Anzahl">Anzahl: 1</p>
-					</div>
-					<button class="Button" id="Rebirth Kaufen" onclick="Rebirth_Buy()">Kaufen</button>
-					<button class="Button" id="Rebirth Max" onclick="Rebirth_Max()">Kaufen Alles</button>
-					<button class="Button" id="Rebirth Auto" onclick="Rebirth_Auto()">Kaufen Auto</button>
-				</div>
-			</div>
-		</div>
-
-		<div id="M_Level">
-			<div class="Fenster">
-				<h3 class="Head" id="Level">Level ::</h3>
+	<div id="M_Upgrade">
+		<div class="Fenster">
+			<h3 class="Head">Multi</h3>
+			<div>
 				<div style="margin: 10px;">
-					<p style="margin: 0px;" id="Level Foderungen">Foderungen</p>
-					<p style="margin: 0px;" id="Level Belonung">Belonung</p>
+					<p style="margin: 0px;" id="Multi Costen">Kosten: 10</p>
+					<p style="margin: 0px;" id="Multi Anzahl">Anzahl: 1</p>
 				</div>
-				<button class="Button" id="Level button" onclick="Level()">Sammeln</button>
+				<button class="Button" id="Multi Kaufen" onclick="Multi_Buy()">Kaufen</button>
+				<button class="Button" id="Multi Max" onclick="Multi_Max()">Kaufen Alles</button>
+				<button class="Button" id="Multi Auto" onclick="Multi_Auto()">Kaufen Auto</button>
 			</div>
 		</div>
-
-		<div id="M_Einstelung">
-			<div class="Fenster">
-				<div>
-					<button class="Button" onclick="Save()">Speichern Cloud</button>
-					<button class="Button" onclick="Load()">Laden Cloud</button>
+		<div class="Fenster">
+			<h3 class="Head">Rebirth</h3>
+			<div>
+				<div style="margin: 10px;">
+					<p style="margin: 0px;" id="Rebirth Costen">Kosten: 10</p>
+					<p style="margin: 0px;" id="Rebirth Anzahl">Anzahl: 1</p>
 				</div>
-				<div>
-					<button class="Button" onclick="Save_als()">Speichern Datai</button>
-					<button class="Button" onclick="Load_als()">Laden Datai</button>
-				</div>
-				<button class="Button" style="background-color: red;" onclick="Zurücksetzen()">Zurücksetzen</button>
-			</div>
-
-			<div class="Fenster" style="display: flex;">
-				<p style="margin: 5px;">Zoom: </p>
-				<button class="Button" onclick="Game.Einstelung.Zoom = Math.round(Math.min(2,   Game.Einstelung.Zoom + 0.1) * 10) / 10; resize()">+</button>
-				<button class="Button" onclick="Game.Einstelung.Zoom = Math.round(Math.max(0.5, Game.Einstelung.Zoom - 0.1) * 10) / 10; resize()">-</button>
-			</div>
-
-			<div class="Fenster" style="display: flex;">
-				<p style="margin: 5px;">Tutorial: </p>
-				<button class="Button" onclick="Game.Tutorial = 0; update()">Neu Starten</button>
+				<button class="Button" id="Rebirth Kaufen" onclick="Rebirth_Buy()">Kaufen</button>
+				<button class="Button" id="Rebirth Max" onclick="Rebirth_Max()">Kaufen Alles</button>
+				<button class="Button" id="Rebirth Auto" onclick="Rebirth_Auto()">Kaufen Auto</button>
 			</div>
 		</div>
+	</div>
 
-		<div>
-			<div style="
-				position: fixed;
-				display: flex;
-				padding-block: 5px;
-				justify-content: center;
-				left: 0px;
-				right: 0px;
-				bottom: 0px;
-				background: lightgray;
-				height: 32px;
-			">
-				<button style="position: relative; bottom: 0px;" id="Tab_I1" onclick="Auswahl = 1; update()" class="Button">Home</button>
-				<button style="position: relative; bottom: 0px;" id="Tab_I2" onclick="Auswahl = 2; update()" class="Button">Upgrade</button>
-				<button style="position: relative; bottom: 0px;" id="Tab_I3" onclick="Auswahl = 3; update()" class="Button">Shop</button>
-				<button style="position: relative; bottom: 0px;" id="Tab_I4" onclick="Auswahl = 4; update()" class="Button">Level</button>
-				<button style="position: relative; bottom: 0px;" id="Tab_I5" onclick="Auswahl = 5; update()" class="Button">Rang</button>
-				<button style="position: relative; bottom: 0px;" id="Tab_I6" onclick="Auswahl = 6; update()" class="Button">Einstelung</button>
+	<div id="M_Shop">
+		<div class="Fenster">
+			<h3 class="Head">Multi</h3>
+			<div style="margin: 10px;display: flex;align-items: center;">
+				<p style="margin-inline: 10px; margin-block: 0;white-space: nowrap;">Kaufen Alles:</p>
+				<button class="Button" style="width: -webkit-fill-available;">1 S.Coin</button>
+			</div>
+			<div style="margin: 10px;display: flex;align-items: center;">
+				<p style="margin-inline: 10px; margin-block: 0;white-space: nowrap;">Auto Kauf:</p>
+				<button class="Button" style="width: -webkit-fill-available;">1 S.Coin</button>
 			</div>
 		</div>
-		<div id="Tutorial">
-			<div class="Fenster" id="Willkommen">
-				<h3 class="Head">Willkommen</h3>
-				<p>Bei Clicky ein Spiel von Max-Game</p>
+		<div class="Fenster">
+			<h3 class="Head">Rebirth</h3>
+			<div style="margin: 10px;display: flex;align-items: center;">
+				<p style="margin-inline: 10px; margin-block: 0;white-space: nowrap;">Kaufen Alles:</p>
+				<button class="Button" style="width: -webkit-fill-available;">1 S.Coin</button>
+			</div>
+			<div style="margin: 10px;display: flex;align-items: center;">
+				<p style="margin-inline: 10px; margin-block: 0;white-space: nowrap;">Auto Kauf:</p>
+				<button class="Button" style="width: -webkit-fill-available;">1 S.Coin</button>
+			</div>
+		</div>
+	</div>
 
-				<div style="position: absolute; left: 0px; bottom: 0px; right: 0px;">
-					<div style="display: flex; position: absolute; left: 0px; bottom: 30px; right: 0px;">
-						<button class="Button" style="width: -webkit-fill-available; background-color: limegreen;" onclick="
-							document.getElementById(`Willkommen`).style.display = `none`
-							document.getElementById(`Text`).style.display = `block`">Interaktion (empfohlen)</button>
-						<button class="Button" style="width: -webkit-fill-available;" onclick="
-							document.getElementById(`Willkommen`).style.display = `none`
-							document.getElementById(`Text`).style.display = `block`">Text (schneller)</button>
-					</div>
-					<button class="Button" style="position: absolute; left: 0px; bottom: 0px; right: 0px; background-color: red;" onclick="Turorial_done()">Schließen</button>
+	<div id="M_Level" class="Mittel">
+		<div class="Fenster" style="width: 250px;">
+			<h3 class="Head" id="Level">Level ::</h3>
+			<div style="margin: 10px;">
+				<p style="margin: 0px;" id="Level Foderungen">Foderungen</p>
+				<p style="margin: 0px;" id="Level Belonung">Belonung</p>
+			</div>
+			<button style="width: -webkit-fill-available;" class="Button" id="Level button" onclick="Level()">Sammeln</button>
+		</div>
+	</div>
+
+	<div id="M_Rang" class="Mittel">
+		<div class="Fenster" style="width: 250px;">
+			<h3 class="Head" id="Rang">Rang ::</h3>
+			<div style="margin: 10px;">
+				<p style="margin: 0px;" id="Rang Foderungen">Foderungen</p>
+			</div>
+			<button style="width: -webkit-fill-available;" class="Button" id="Rang button" onclick="Rang()">Sammeln</button>
+		</div>
+	</div>
+
+	<div id="M_Einstelung">
+		<div class="Fenster">
+			<div>
+				<button class="Button" onclick="Save_als()">Speichern Datai</button>
+				<button class="Button" onclick="Load_als()">Laden Datai</button>
+			</div>
+			<button class="Button" style="background-color: red;" onclick="Zurücksetzen()">Zurücksetzen</button>
+			
+		</div>
+	
+		<div class="Fenster" style="display: flex;">
+			<p style="margin: 5px;">Zoom: </p>
+			<button class="Button" onclick="Game.Einstelung.Zoom = Math.round(Math.min(2,   Game.Einstelung.Zoom + 0.1) * 10) / 10; resize()">+</button>
+			<button class="Button" onclick="Game.Einstelung.Zoom = Math.round(Math.max(0.5, Game.Einstelung.Zoom - 0.1) * 10) / 10; resize()">-</button>
+		</div>
+	
+		<div class="Fenster" style="display: flex;">
+			<p style="margin: 5px;">Tutorial: </p>
+			<button class="Button" onclick="Game.Tutorial = 0; update()">Neu Starten</button>
+		</div>
+	</div>
+
+	<div>
+		<div style="
+			position: fixed;
+			display: flex;
+			padding-block: 5px;
+			justify-content: center;
+			left: 0px;
+			right: 0px;
+			bottom: 0px;
+			background: lightgray;
+			height: 32px;
+		">
+			<button style="position: relative; bottom: 0px;" id="Tab_I1" onclick="Auswahl = 1; update()" class="Button">Home</button>
+			<button style="position: relative; bottom: 0px;" id="Tab_I2" onclick="Auswahl = 2; update()" class="Button">Upgrade</button>
+			<button style="position: relative; bottom: 0px;" id="Tab_I3" onclick="Auswahl = 3; update()" class="Button">Shop</button>
+			<button style="position: relative; bottom: 0px;" id="Tab_I4" onclick="Auswahl = 4; update()" class="Button">Level</button>
+			<button style="position: relative; bottom: 0px;" id="Tab_I5" onclick="Auswahl = 5; update()" class="Button">Rang</button>
+			<button style="position: relative; bottom: 0px;" id="Tab_I6" onclick="Auswahl = 6; update()" class="Button">Einstelung</button>
+		</div>
+	</div>
+	<div id="Tutorial">
+		<div class="Fenster" id="Willkommen">
+			<h3 class="Head">Willkommen</h3>
+			<p>Bei Clicky ein Spiel von Max-Game</p>
+		
+			<div style="position: absolute; left: 0px; bottom: 0px; right: 0px;">
+				<div style="display: flex; position: absolute; left: 0px; bottom: 30px; right: 0px;">
+					<button class="Button" style="width: -webkit-fill-available; background-color: limegreen;" onclick="
+						document.getElementById(`Willkommen`).style.display = `none`
+						document.getElementById(`Text`).style.display = `block`">Interaktion (empfohlen)</button>
+					<button class="Button" style="width: -webkit-fill-available;" onclick="
+						document.getElementById(`Willkommen`).style.display = `none`
+						document.getElementById(`Text`).style.display = `block`">Text (schneller)</button>
 				</div>
-			</div>
-			<div class="Fenster" id="Text">
-				<h3 class="Head">Text</h3>
-
-				<p>(In Arbeit)</p>
-				<p>Clicky ist ein spiel wo man Clicken und Upgrads kann und ein Shop hat</p>
-				<p>Wenn man Clickt bekommt man Coin wie viel man bekommt bestimt die Power</p>
-				<p>Um mehr Power zu bekommen braucht man Upgrads aber um Upgrade zu bekommen brauch man Coin</p>
-				<p>Es gibt Mehre </p>
-				<p>Es gibt auch den Shop den man später freischaltet im Shop kann man dinge kaufen die z.B.: "Multi Rabat" das mach das Multi Weniger Kostet</p>
-
-				<button class="Button" style="position: absolute; left: 0px; bottom: 0px; right: 0px;" onclick="Turorial_done()">Schließen</button>
+				<button class="Button" style="position: absolute; left: 0px; bottom: 0px; right: 0px; background-color: red;" onclick="Turorial_done()">Schließen</button>
 			</div>
 		</div>
-		<button id="Zurück" onclick="location.replace('https://maxgamer999991.github.io/Max-Game/')"><</button>
-	</body>
+		<div class="Fenster" id="Text">
+			<h3 class="Head">Text</h3>
+		
+			<p>(In Arbeit)</p>
+			<p>Clicky ist ein spiel wo man Clicken und Upgrads kann und ein Shop hat</p>
+			<p>Wenn man Clickt bekommt man Coin wie viel man bekommt bestimt die Power</p>
+			<p>Um mehr Power zu bekommen braucht man Upgrads aber um Upgrade zu bekommen brauch man Coin</p>
+			<p>Es gibt Mehre </p>
+			<p>Es gibt auch den Shop den man später freischaltet im Shop kann man dinge kaufen die z.B.: "Multi Rabat" das mach das Multi Weniger Kostet</p>
+		
+			<button class="Button" style="position: absolute; left: 0px; bottom: 0px; right: 0px;" onclick="Turorial_done()">Schließen</button>
+		</div>
+	</div>
+	<button id="Zurück" onclick="location.replace('https://maxgamer999991.github.io/Max-Game/')"><</button>
+</body>
 </html>
 <script>
 	if (location.host != "maxgamer999991.github.io") {document.getElementById("Zurück").style.display = "none"}
 
 	var Auswahl = 1;
 	var Game = {
-		Coin : 0,
+		Coin: 0,
 
 
-		Shop : {
-			Multi_max : false,
-			Multi_auto : false,
-			Rebirth_max : false,
+		Shop: {
+			Multi_max    : false,
+			Multi_auto   : false,
+			Rebirth_max  : false,
 			Rebirth_auto : false,
-			S_Coin : false,
-			S_Coin_max : false,
-			S_Coin_auto : false,
+			S_Coin       : false,
+			S_Coin_max   : false,
+			S_Coin_auto  : false,
 		},
 
-		Multi : {
+		Multi: {
 			Anzahl : 1,
 			Costen : 10,
-			Rabat : 0,
-			Auto : false,
+			Rabat  : 0,
+			Auto   : false,
 		},
-		Rebirth : {
+		Rebirth: {
 			Anzahl : 0,
 			Costen : 160,
-			Rabat : 0,
-			Auto : false,
+			Rabat  : 0,
+			Auto   : false,
 		},
 
 		Level : 0,
+		Rang : {
+			Anzahl : 0,
+			Forder : 0,
+		},
 
 		S_Coin : {
 			Anzahl : 0,
-			Auto : false,
+			Auto   : false,
 		},
 
-		Crit : 0,
+		Crit     : 0,
 		Tutorial : 0,
 
 		Einstelung : {
@@ -361,8 +408,13 @@
 		} else {
 			document.getElementById("M_Upgrade").style.display = "none"
 		}
+		if (Auswahl == 3) {
+			document.getElementById("M_Shop").style.display = "block"
+		} else {
+			document.getElementById("M_Shop").style.display = "none"
+		}
 		if (Auswahl == 4) {
-			document.getElementById("M_Level").style.display = "block"
+			document.getElementById("M_Level").style.display = "flex"
 			document.getElementById("Level").textContent = `Level ${Game.Level}`;
 			document.getElementById("Level Foderungen").textContent = `Foderungen: ${Level_().Costentext}`;
 			document.getElementById("Level Belonung").textContent = `Belonung: ${Level_().Belonung}`;
@@ -373,6 +425,14 @@
 			}
 		} else {
 			document.getElementById("M_Level").style.display = "none"
+		}
+		if (Auswahl == 5) {
+			document.getElementById("M_Rang").style.display = "flex"
+
+			document.getElementById("Rang").textContent = `Rang ${Game.Rang.Anzahl}`
+			document.getElementById("Rang Foderungen").textContent = `${Game.Rang.Forder} Rebirth`
+		} else {
+			document.getElementById("M_Rang").style.display = "none"
 		}
 		if (Auswahl == 6) {
 			document.getElementById("M_Einstelung").style.display = "block"
@@ -453,6 +513,18 @@
 	function Level() {
 		if (Level_().Don) {
 			Game.Level += 1;
+		}
+		update()
+	}
+
+	function Rang() {
+		if (Game.Rang.Forder <= Game.Rebirth.Anzahl) {
+			Game.Rebirth.Anzahl -= Game.Rang.Forder;
+			Game.Rang.Anzahl += 1;
+			Game.Rang.Forder *= 2;
+			if (Game.Rang.Forder == 0) {
+				Game.Rang.Forder = 1
+			}
 		}
 		update()
 	}

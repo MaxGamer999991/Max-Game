@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <style>
+        div {
+            position: absolute;
+            background-color: gray;
+            width:  30px;
+            height: 30px;
+            border-radius: 100%;
+            border-color: black;
+            border-width: 5px;
+            border-style: solid;
+        }
+    </style>
+    <body>
+        <div style="bottom: 0px; left: 0px;"></div>
+    </body>
+    <script>
+        var Ball = [{x:0, y:0, dx:0, dy:0}]
+
+        function distanze(x1=0,y1=0,x2,y2) { return Math.sqrt( ((y2-y1)*(y2-y1)) + ((x2,x1)*(x2,x1)) ) }
+
+        function erstellen(x,y,dx=0,dy=0) {
+            Ball.push({x:x, y:y, dx:dx, dy:dy})
+        }
+
+        function update() {
+            let i = 0
+            while (i < Ball.length) {
+
+                Ball[i].x += Ball[i].dx
+                if (Math.abs(Ball[i].x) >= (innerWidth/2)-30) {
+                    Ball[i].x  -= Ball[i].dx
+                    Ball[i].dx = 0-(Ball[i].dx / 2)
+                }
+
+                Ball[i].y += Ball[i].dy
+                if (Math.abs(Ball[i].y) >= (innerHeight/2)-30) {
+                    Ball[i].y  -= Ball[i].dy
+                    Ball[i].dy = 0-(Ball[i].dy / 2)
+                }
+
+                Ball[i].dy -= 0.1
+
+                i++
+            }
+        }
+
+        function render() {
+            let i = 0
+            let html = ""
+            while (i < Ball.length) {
+
+                html += `<div style="bottom: ${Ball[i].y+(innerHeight/2)}px; left: ${Ball[i].x+(innerWidth/2)}px;"></div>`
+
+                i++
+            }
+            document.body.innerHTML = html
+        }
+
+        function main() {
+            update()
+            render()
+        }
+
+        setInterval(main,10)
+        setInterval(() => {
+            let x  = (Math.random()*(innerWidth -20))-(innerWidth /2)+20
+            let y  = (Math.random()*(innerHeight-20))-(innerHeight/2)+20
+            let dx = (Math.random()*2)-1
+            let dy = (Math.random()*2)-1
+            erstellen(x,y,dx,dy)
+        },100)
+    </script>
+</html>
