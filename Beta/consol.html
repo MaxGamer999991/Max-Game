@@ -1,70 +1,77 @@
-<!DOCTYPE html>
 <html>
     <head>
         <title>Consol</title>
+        <style>
+            body {
+                background-color: black;
+                font-family: sans-serif;
+            }
+            p {
+                color: limegreen;
+                margin-block: 5px;
+            }
+            input {
+                border: none;
+                background: none;
+                color: lightgreen;
+                width: -webkit-fill-available;
+                margin: 5px;
+            }
+            div {
+                display: flex;
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                padding: 5px;
+                background-color: rgb(40, 40, 40);
+            }
+            form {
+                display: flex;
+                width: -webkit-fill-available;
+                margin: 0;
+            }
+        </style>
     </head>
-    <style>
-        body {
-            background-color: black;
-            font-family: sans-serif;
-        }
-        p {
-            color: limegreen;
-            margin-block: 5px;
-        }
-    </style>
     <body>
         <p>error</p>
+        <div>
+            <p style="margin: 5px;">></p>
+            <form onsubmit="ssubmit();return false">
+                <input type="text" id="teext" autocomplete="off" oninput="ffind()">
+                <button type="submit">Run</button>
+            </form>
+        </div>
+        <script>
+            var log = [];
+
+            function ssubmit() {
+                log.push(document.getElementById("teext").value)
+                run(document.getElementById("teext").value)
+                document.getElementById("teext").value = "";
+            };
+            function ffind() {
+                if (document.getElementById("teext").value == "%file%") {
+                    const input = document.createElement("input");
+		            input.type = "file";
+		            input.accept = ".txt";
+
+		            input.addEventListener("change", (event) => {
+		            	const file = event.target.files[0];
+                        const reader = new FileReader()
+                        reader.onload = () => {
+                            run(reader.result)
+                        }
+                        reader.readAsDataURL(file);
+		            	log.push(`%${file.url}%`)
+		            })
+		            input.click();
+                }
+            }
+
+            function run() {
+                
+            }
+        </script>
     </body>
 </html>
-<script>
-    function teilen(i) {
-        let List = []
-
-        let ii = ""
-        for (let iii = 0; i.length > iii; iii++) {
-            switch (i[iii]) {
-                case ";":
-                    if (ii != "") List.push(ii);
-                    List.push(";");
-                    ii = "";
-                    break
-                case " ":
-                    if (ii != "") List.push(ii);
-                    ii = "";
-                    break
-                default:
-                    ii += i[iii];
-                    break
-            }
-        }
-
-        return List
-    }
-    function run(List) {
-        var Var = []
-        for (let i = 0; List.length > i; i++) {
-            switch (List[i]) {
-                case "var":
-                    let ii = "";
-                    let iii = i;
-                    while (List[i+3] != ";") {
-                        ii += List[i+3]
-                        ii += " "
-                        i += 1
-                    }
-                    Var.push([List[iii+1], ii])
-                    i += 3;
-                    break
-                case "message":
-                    console.log(List[i+1])
-                    i += 2
-                    break
-                default:
-                    console.error("error")
-                    break
-            }
-        }
-        return Var
-    }
-</script>
